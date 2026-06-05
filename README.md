@@ -6,11 +6,11 @@
 ui/       플러터 프로젝트로 작성된 앱의 UI 부분입니다.
 server/   앱의 서버입니다. Nest.js, TypeORM, postgreSQL 과 연동하여 사용합니다
 docs/     공통 디자인 및 아키텍쳐
-
 ```
 
 ## Release
 ```text
+
 release 0.1.0 : 구현 완료된 내용을 apk 파일로 첫 구현
 
 ```
