@@ -8,6 +8,7 @@ import 'settings/app_settings.dart';
 import 'theme/app_theme.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(SpecMoaApp());
 }
 
