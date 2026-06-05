@@ -1,6 +1,6 @@
 # specmoa.zip
 
-This repository is split into two apps:
+해당 프로젝트는 2개의 폴더로 나누어집니다.
 
 ```text
 ui/       플러터 프로젝트로 작성된 앱의 UI 부분입니다.
