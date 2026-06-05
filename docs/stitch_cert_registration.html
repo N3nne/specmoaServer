@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<title>자격증 등록 - 스펙모아.zip</title>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#2c2f31",
+                        "on-primary": "#f0f2ff",
+                        "on-secondary-fixed-variant": "#2d48ac",
+                        "error-dim": "#9f0519",
+                        "primary-fixed-dim": "#5391ff",
+                        "on-secondary-fixed": "#00278f",
+                        "on-tertiary-container": "#5e106a",
+                        "surface-container-low": "#eef1f3",
+                        "on-primary-container": "#002150",
+                        "on-primary-fixed": "#000000",
+                        "primary-fixed": "#6e9fff",
+                        "on-surface-variant": "#595c5e",
+                        "secondary-fixed": "#c7cfff",
+                        "inverse-surface": "#0b0f10",
+                        "inverse-on-surface": "#9a9d9f",
+                        "surface-variant": "#d9dde0",
+                        "on-background": "#2c2f31",
+                        "tertiary-fixed-dim": "#e28ce9",
+                        "surface-container": "#e5e9eb",
+                        "primary-container": "#6e9fff",
+                        "secondary-fixed-dim": "#b4c1ff",
+                        "tertiary": "#893c92",
+                        "surface-bright": "#f5f7f9",
+                        "surface-container-lowest": "#ffffff",
+                        "primary": "#0057bd",
+                        "outline": "#747779",
+                        "on-secondary-container": "#223ea2",
+                        "on-tertiary-fixed": "#3e0047",
+                        "secondary-dim": "#2c47ab",
+                        "outline-variant": "#abadaf",
+                        "on-error": "#ffefee",
+                        "on-error-container": "#570008",
+                        "secondary-container": "#c7cfff",
+                        "surface-tint": "#0057bd",
+                        "on-tertiary": "#ffeefb",
+                        "inverse-primary": "#4d8eff",
+                        "on-primary-fixed-variant": "#002a62",
+                        "tertiary-fixed": "#f199f7",
+                        "on-secondary": "#f2f1ff",
+                        "background": "#f5f7f9",
+                        "error": "#b31b25",
+                        "tertiary-container": "#f199f7",
+                        "surface-container-highest": "#d9dde0",
+                        "surface": "#f5f7f9",
+                        "primary-dim": "#004ca6",
+                        "error-container": "#fb5151",
+                        "on-tertiary-fixed-variant": "#681c73",
+                        "surface-container-high": "#dfe3e6",
+                        "secondary": "#3a53b7",
+                        "tertiary-dim": "#7b2f85",
+                        "surface-dim": "#d0d5d8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "3xl": "1.25rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "display": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f5f7f9; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-header { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            background: transparent;
+            bottom: 0;
+            color: transparent;
+            cursor: pointer;
+            height: auto;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: auto;
+        }
+    </style>
+</head>
+<body class="text-on-surface antialiased">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 glass-header shadow-sm">
+<div class="flex items-center px-4 h-16 w-full max-w-7xl mx-auto">
+<button aria-label="Go back" class="p-2 -ml-2 rounded-full hover:bg-surface-container-low transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined text-primary text-2xl">arrow_back</span>
+</button>
+<h1 class="ml-2 font-headline text-on-surface font-bold tracking-tight text-xl">자격증 등록</h1>
+</div>
+</header>
+<main class="pt-20 pb-32 px-5 max-w-2xl mx-auto">
+<!-- Instructional Header -->
+<section class="mb-8 mt-4">
+<h2 class="font-headline text-2xl font-extrabold text-on-surface mb-2 tracking-tight">새로운 목표를<br/>추가해 볼까요?</h2>
+<p class="text-on-surface-variant text-sm font-medium">취득하고 싶은 자격증의 정보를 입력해 주세요.</p>
+</section>
+<!-- Registration Form Card -->
+<div class="space-y-8 bg-surface-container-lowest p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+<!-- Certification Name Input -->
+<div class="space-y-2">
+<label class="block text-[14px] font-semibold text-on-surface-variant ml-1" for="cert_name">자격증 이름</label>
+<div class="relative">
+<input class="w-full h-14 px-4 bg-surface-container-low border-none rounded-xl text-on-surface placeholder:text-outline-variant focus:ring-2 focus:ring-primary/20 transition-all font-medium" id="cert_name" placeholder="자격증 명칭을 입력해 주세요" type="text"/>
+</div>
+</div>
+<!-- Category Selection -->
+<div class="space-y-3">
+<label class="block text-[14px] font-semibold text-on-surface-variant ml-1">카테고리 선택</label>
+<div class="flex flex-wrap gap-2">
+<button class="category-chip px-5 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant text-sm font-semibold transition-all hover:bg-surface-variant active:scale-95 active-chip" data-selected="true" type="button">IT</button>
+<button class="category-chip px-5 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-semibold transition-all hover:bg-surface-variant active:scale-95" type="button">어학</button>
+<button class="category-chip px-5 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-semibold transition-all hover:bg-surface-variant active:scale-95" type="button">금융</button>
+<button class="category-chip px-5 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-semibold transition-all hover:bg-surface-variant active:scale-95" type="button">전기</button>
+<button class="category-chip px-5 py-2.5 rounded-full bg-surface-container-low text-on-surface-variant text-sm font-semibold transition-all hover:bg-surface-variant active:scale-95" type="button">기타</button>
+</div>
+</div>
+<!-- Exam Date Selection -->
+<div class="space-y-2">
+<label class="block text-[14px] font-semibold text-on-surface-variant ml-1" for="exam_date">목표 시험일</label>
+<div class="relative group">
+<input class="w-full h-14 px-4 pr-12 bg-surface-container-low border-none rounded-xl text-on-surface focus:ring-2 focus:ring-primary/20 transition-all font-medium appearance-none" id="exam_date" type="date"/>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-primary">
+<span class="material-symbols-outlined">calendar_today</span>
+</div>
+</div>
+</div>
+<!-- Learning Goal (Optional) -->
+<div class="space-y-2">
+<label class="block text-[14px] font-semibold text-on-surface-variant ml-1" for="learning_goal">학습 목표 <span class="text-outline font-normal">(선택)</span></label>
+<textarea class="w-full p-4 bg-surface-container-low border-none rounded-xl text-on-surface placeholder:text-outline-variant focus:ring-2 focus:ring-primary/20 transition-all font-medium resize-none" id="learning_goal" placeholder="나만의 다짐이나 학습 계획을 간단히 적어보세요." rows="4"></textarea>
+</div>
+</div>
+<!-- Reference Illustration/Section from 'My Specs' style -->
+<div class="mt-12 opacity-40 grayscale pointer-events-none select-none">
+<p class="text-center font-headline font-bold text-on-surface-variant text-xs uppercase tracking-widest mb-4">Preview Reference Area</p>
+<div class="overflow-hidden rounded-2xl h-32">
+<img alt="Design reference for consistency" class="w-full object-top object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ugdWdBN-DOamOI-RZYwRtkzMJQhuUa2Uiw8zEj96rbDaqNwUHe15XyJchDTVt93VoYtKCVRSn7KnQHrYKWODRhD0pnxwbw8sHae1385RGfuiDePnbREwAvBBOrVNeCmjBkfC-k9hBbqC75p8kDolBsuDsz4G3FPrNbHIRxrj3cPQmeVkgVB74KOHMAmXiLsMYI7WvkPBG6i0Oy6TyH2miGITvWIPgap0Y6o3D0iy8PB9Lh58vkkpUbfoO0"/>
+</div>
+</div>
+</main>
+<!-- Bottom Action Button -->
+<div class="fixed bottom-0 left-0 w-full p-6 bg-gradient-to-t from-surface via-surface/95 to-transparent">
+<div class="max-w-2xl mx-auto">
+<button class="w-full h-16 bg-primary text-on-primary font-headline font-bold text-lg rounded-2xl shadow-lg shadow-primary/20 hover:bg-primary-dim active:scale-[0.98] transition-all duration-200 flex items-center justify-center gap-2" id="submit_btn">
+                등록하기
+                <span class="material-symbols-outlined text-xl">check_circle</span>
+</button>
+</div>
+</div>
+<script>
+        // Category Selection Logic
+        const chips = document.querySelectorAll('.category-chip');
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                // Reset all chips
+                chips.forEach(c => {
+                    c.classList.remove('bg-primary', 'text-on-primary', 'shadow-md');
+                    c.classList.add('bg-surface-container-low', 'text-on-surface-variant');
+                });
+                // Activate clicked chip
+                chip.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+                chip.classList.add('bg-primary', 'text-on-primary', 'shadow-md');
+            });
+        });
+
+        // Initial state for 'IT' chip
+        const defaultChip = document.querySelector('.category-chip[data-selected="true"]');
+        if (defaultChip) {
+            defaultChip.classList.remove('bg-surface-container-low', 'text-on-surface-variant');
+            defaultChip.classList.add('bg-primary', 'text-on-primary', 'shadow-md');
+        }
+
+        // Form Submission Interaction
+        document.getElementById('submit_btn').addEventListener('click', () => {
+            const btn = document.getElementById('submit_btn');
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> 처리 중...';
+            btn.classList.add('opacity-80', 'cursor-wait');
+            
+            setTimeout(() => {
+                btn.innerHTML = '등록 완료 <span class="material-symbols-outlined">done_all</span>';
+                btn.classList.remove('bg-primary');
+                btn.classList.add('bg-green-600');
+                
+                setTimeout(() => {
+                    // Simulation of going back to the specs screen
+                    window.history.back();
+                }, 800);
+            }, 1200);
+        });
+
+        // Soft back navigation
+        document.querySelector('button[aria-label="Go back"]').addEventListener('click', () => {
+            window.history.back();
+        });
+    </script>
+</body></html>

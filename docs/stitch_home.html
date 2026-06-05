@@ -1,0 +1,321 @@
+<!DOCTYPE html><html lang="ko"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>스펙모아.zip - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#fefcff",
+                        "on-primary-fixed-variant": "#004491",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-dim": "#d8dadc",
+                        "surface-container-low": "#f2f4f6",
+                        "on-primary-fixed": "#001a40",
+                        "secondary-fixed-dim": "#bcc7d9",
+                        "inverse-primary": "#acc7ff",
+                        "outline-variant": "#c1c6d6",
+                        "on-tertiary-container": "#fffbff",
+                        "tertiary-fixed-dim": "#ffb689",
+                        "inverse-surface": "#2d3133",
+                        "surface-container-high": "#e6e8ea",
+                        "on-background": "#191c1e",
+                        "on-primary": "#ffffff",
+                        "background": "#f8f9fb",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#545f6e",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#1071e5",
+                        "primary-fixed": "#d7e2ff",
+                        "on-secondary-container": "#586373",
+                        "on-tertiary-fixed": "#311300",
+                        "on-surface-variant": "#414754",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#3d4856",
+                        "surface-container": "#eceef0",
+                        "on-surface": "#191c1e",
+                        "tertiary-container": "#ba5900",
+                        "surface-tint": "#005bbe",
+                        "tertiary": "#944600",
+                        "secondary-container": "#d5e0f3",
+                        "surface-bright": "#f8f9fb",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#ffdbc8",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-fixed": "#111c29",
+                        "primary": "#0059b9",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#acc7ff",
+                        "outline": "#727785",
+                        "secondary-fixed": "#d8e3f5",
+                        "surface": "#f8f9fb",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e0e3e5",
+                        "on-tertiary-fixed-variant": "#743500"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-header {
+            background: rgba(248, 249, 251, 0.7);
+            backdrop-filter: blur(20px);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 glass-header">
+<div class="flex justify-between items-center px-5 h-16 w-full max-w-2xl mx-auto">
+<span class="text-xl font-black text-blue-600 dark:text-blue-400 tracking-tighter font-headline">스펙모아.zip</span>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-200/50 transition-transform active:scale-95 duration-200">
+<span class="material-symbols-outlined text-slate-500">search</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden">
+<img alt="User Profile Avatar" class="w-full h-full object-cover" data-alt="professional headshot of a smiling young man in a clean studio setting with soft lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNltvCbtVaZ8TafL-trozNtHguFV7dx5ayWpbPBEQK9CaQftRool9HZnODIDU9_lAATmXR9mJ-Xvf6UjMZwjYO5tr6tRc8R83yGG-swNhQRHN0eghDzK91IQAyXsqqyUKFO0t8gCb_vOH1Q5U3TeukofMQCfdw4GBsw8QxbQmZf1FCHbu9K4lXahJ13oZt5kD6x_acL7WD5zyPUkCSDxa9j5A5KXXBLI2sItlF4QjaMyqImMcuZJFY0J6Kjcdz0tSg4hOTWiwXLeMW">
+</div>
+</div>
+</div>
+</header>
+<main class="pt-20 pb-32 max-w-2xl mx-auto px-5">
+<!-- Search Section (Bento Style) -->
+<section class="mb-10">
+<div class="bg-primary-container rounded-lg p-6 text-on-primary-container relative overflow-hidden shadow-lg shadow-blue-500/20">
+<div class="relative z-10">
+<h1 class="font-headline font-bold text-2xl tracking-tight mb-2">찾으시는 자격증이 있나요?</h1>
+<p class="text-white/80 text-sm mb-6">전국 5,000+ 개의 자격증 정보를 한눈에</p>
+<div class="flex items-center bg-white/10 backdrop-blur-md rounded-full px-5 py-3 gap-3 border border-white/20">
+<span class="material-symbols-outlined text-white/70">search</span>
+<input class="bg-transparent border-none p-0 focus:ring-0 placeholder:text-white/50 text-white w-full text-sm" placeholder="자격증 명칭, 직무 키워드 검색" type="text">
+</div>
+</div>
+<!-- Decorative element -->
+<div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+</div>
+</section>
+<!-- 내 자격증 (Horizontal Scroll) -->
+<section class="mb-10">
+<div class="flex justify-between items-center mb-4">
+<h2 class="font-headline font-bold text-lg tracking-tight">내 자격증</h2>
+<button class="text-primary text-xs font-semibold hover:underline">모두 보기</button>
+</div>
+<div class="flex gap-4 overflow-x-auto no-scrollbar pb-4 -mx-5 px-5">
+<!-- Cert Card 1 -->
+<div class="flex-none w-64 bg-surface-container-lowest rounded-lg p-5 shadow-sm border border-outline-variant/10">
+<div class="flex justify-between items-start mb-4">
+<span class="bg-blue-50 text-primary text-[10px] font-bold px-2 py-1 rounded-full">시험 D-14</span>
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<h3 class="font-headline font-bold text-md mb-1">정보처리기사</h3>
+<p class="text-slate-500 text-xs mb-4 font-body">한국산업인력공단</p>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 65%;"></div>
+</div>
+<div class="flex justify-between mt-2">
+<span class="text-[10px] font-medium text-slate-400">진행률</span>
+<span class="text-[10px] font-bold text-primary">65%</span>
+</div>
+</div>
+<!-- Cert Card 2 -->
+<div class="flex-none w-64 bg-surface-container-lowest rounded-lg p-5 shadow-sm border border-outline-variant/10">
+<div class="flex justify-between items-start mb-4">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed-variant text-[10px] font-bold px-2 py-1 rounded-full">자격증 취득</span>
+<span class="material-symbols-outlined text-tertiary" style="font-variation-settings: 'FILL' 1;">military_tech</span>
+</div>
+<h3 class="font-headline font-bold text-md mb-1">SQLD</h3>
+<p class="text-slate-500 text-xs mb-4 font-body">한국데이터산업진흥원</p>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full rounded-full" style="width: 100%;"></div>
+</div>
+<div class="flex justify-between mt-2">
+<span class="text-[10px] font-medium text-slate-400">최종 점수</span>
+<span class="text-[10px] font-bold text-tertiary-container">88점</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 인기 자격증 (List) -->
+<section class="mb-10 bg-surface-container-low rounded-lg p-6">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline font-bold text-lg tracking-tight">인기 자격증</h2>
+<span class="text-[10px] font-medium text-slate-400">오후 2:00 기준</span>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-lg shadow-sm">
+<span class="font-headline font-black text-primary text-xl w-6">1</span>
+<div class="flex-grow">
+<h4 class="font-semibold text-sm">컴퓨터활용능력 1급</h4>
+<p class="text-[11px] text-slate-500">대한상공회의소</p>
+</div>
+<div class="flex items-center gap-1 text-error text-[10px] font-bold">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>2</span>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-lg shadow-sm">
+<span class="font-headline font-black text-primary text-xl w-6">2</span>
+<div class="flex-grow">
+<h4 class="font-semibold text-sm">토익 (TOEIC)</h4>
+<p class="text-[11px] text-slate-500">YBM</p>
+</div>
+<div class="flex items-center gap-1 text-slate-400 text-[10px] font-bold">
+<span class="material-symbols-outlined text-sm">remove</span>
+</div>
+</div>
+<div class="flex items-center gap-4 bg-surface-container-lowest p-4 rounded-lg shadow-sm">
+<span class="font-headline font-black text-primary text-xl w-6">3</span>
+<div class="flex-grow">
+<h4 class="font-semibold text-sm">ADsP (데이터분석준전문가)</h4>
+<p class="text-[11px] text-slate-500">한국데이터산업진흥원</p>
+</div>
+<div class="flex items-center gap-1 text-primary text-[10px] font-bold">
+<span class="material-symbols-outlined text-sm">new_releases</span>
+<span>NEW</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 인기 질문 (Grid) -->
+<section class="mb-10">
+<div class="flex justify-between items-center mb-4">
+<h2 class="font-headline font-bold text-lg tracking-tight">인기 질문</h2>
+<button class="text-primary text-xs font-semibold">커뮤니티 이동</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 shadow-sm">
+<div class="flex items-center gap-2 mb-3">
+<div class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-xs text-slate-500">person</span>
+</div>
+<span class="text-[11px] font-medium text-slate-500">비전공자준비생</span>
+</div>
+<p class="font-semibold text-sm mb-4 line-clamp-2">정보처리기사 실기 비전공자가 2주 만에 합격 가능할까요?</p>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined text-sm">mode_comment</span>
+<span class="text-[10px]">24</span>
+</div>
+<div class="flex items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined text-sm">favorite</span>
+<span class="text-[10px]">12</span>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-lg border border-outline-variant/10 shadow-sm">
+<div class="flex items-center gap-2 mb-3">
+<div class="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-xs text-slate-500">person</span>
+</div>
+<span class="text-[11px] font-medium text-slate-500">취뽀가즈아</span>
+</div>
+<p class="font-semibold text-sm mb-4 line-clamp-2">금융권 취업할 때 매경테스트랑 테셋 중에 뭐가 더 유리한가요?</p>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined text-sm">mode_comment</span>
+<span class="text-[10px]">48</span>
+</div>
+<div class="flex items-center gap-1 text-slate-400">
+<span class="material-symbols-outlined text-sm">favorite</span>
+<span class="text-[10px]">35</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 합격 수기 (Visual Cards) -->
+<section class="mb-10">
+<h2 class="font-headline font-bold text-lg tracking-tight mb-4">합격 수기</h2>
+<div class="space-y-4">
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden flex shadow-sm border border-outline-variant/10">
+<div class="w-24 h-24 flex-none overflow-hidden">
+<img alt="Study story" class="w-full h-full object-cover" data-alt="neatly organized study desk with notebook, coffee, and sunlight streaming through window" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvNetR09AwWq8pdI_yQjtA3TpUKmI-rKAwtzpav4xz7f3soXKT6TfpWN4fNRHH7rnJKmhauIbSTdxzjlmp2znrd2JXNKxOHJJNh1ZfaY0-ncl1VX9w2M0BdrrniWsMe7WV5ulN3W0Hj5H3smQ-NVOGCKr4f1GlKcZ1nBp62ku7Z3DDy6RC_EegLqq6PFlbbODSc0YCzR06Gn_K-Ik7-45sm7V7IdX9a_A_XHzZAzeoxfickPYAe8UdP9R79FExKoUmbK4KsVYZ2jKG">
+</div>
+<div class="p-4 flex flex-col justify-center">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-primary font-bold text-[10px]">NEW</span>
+<h4 class="font-bold text-sm">직장인 1개월 토익 900점 달성 후기</h4>
+</div>
+<p class="text-[11px] text-slate-500 line-clamp-1">퇴근 후 3시간씩 투자한 저만의 파트별 공부법 공유합니다...</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden flex shadow-sm border border-outline-variant/10">
+<div class="w-24 h-24 flex-none overflow-hidden">
+<img alt="Study story" class="w-full h-full object-cover" data-alt="close-up of a person typing on a laptop in a modern minimalist workspace" src="https://lh3.googleusercontent.com/aida-public/AB6AXuALc62gR6rbmaaaSSOREsMZoHhyWn4IMrHxMfjN3UTf3uQs6iRhrF56AO6x7hgX4C1jGwtr49zgQeO3qavQZbxYLYzuRK7vihSX-Ire99KgDRfQmVTlsiR5t0tfz8XXwiaICMWRIza5ykpg4SHQITSiDwSMq9pbtOjetF5FLRZ_dUGx2GHDkhBW3NNczXO5E9O6VTNVSnYNkTL59nb4Bq7k_mspGjwZQWAkeO09ox6NQztfGCWnIqWPTSSftB1-C3TihE-p83dkuDI1">
+</div>
+<div class="p-4 flex flex-col justify-center">
+<div class="flex items-center gap-2 mb-1">
+<span class="text-tertiary font-bold text-[10px]">BEST</span>
+<h4 class="font-bold text-sm">컴활 1급 실기 3수 끝에 합격한 팁</h4>
+</div>
+<p class="text-[11px] text-slate-500 line-clamp-1">포기하고 싶을 때 마음 다잡은 방법과 시험 당일 실수 방지...</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-[2.5rem] bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.06)]">
+<div class="flex justify-around items-center w-full px-2 pb-6 pt-3 max-w-2xl mx-auto">
+<!-- Home (Active) -->
+<a class="flex flex-col items-center justify-center text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded-full px-4 py-1 transition-all duration-200 scale-98" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-semibold">홈</span>
+</a>
+<!-- 자격증 -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-blue-500 dark:hover:text-blue-300 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">verified</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-semibold">자격증</span>
+</a>
+<!-- 타이머 -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-blue-500 dark:hover:text-blue-300 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">timer</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-semibold">타이머</span>
+</a>
+<!-- 탐색 -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-blue-500 dark:hover:text-blue-300 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-semibold">탐색</span>
+</a>
+<!-- 마이 -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-blue-500 dark:hover:text-blue-300 transition-all duration-200" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[10px] font-semibold">마이</span>
+</a>
+</div>
+</nav>
+</body></html>

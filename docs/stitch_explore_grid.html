@@ -1,0 +1,297 @@
+<!DOCTYPE html><html lang="ko"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>탐색 - Certification Platform</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#ffefee",
+                    "secondary-fixed-dim": "#b4c1ff",
+                    "tertiary-dim": "#7b2f85",
+                    "on-secondary-fixed-variant": "#2d48ac",
+                    "surface": "#f5f7f8",
+                    "tertiary-fixed-dim": "#e28ce9",
+                    "on-tertiary-fixed-variant": "#681c73",
+                    "primary-dim": "#004ca6",
+                    "tertiary-container": "#f199f7",
+                    "inverse-primary": "#4d8eff",
+                    "on-primary-container": "#002150",
+                    "on-secondary-container": "#223ea2",
+                    "on-background": "#2c2f31",
+                    "secondary-container": "#c7cfff",
+                    "primary-fixed-dim": "#5391ff",
+                    "surface-tint": "#3B82F6",
+                    "surface-container-lowest": "#ffffff",
+                    "primary": "#3B82F6",
+                    "on-primary": "#f0f2ff",
+                    "primary-fixed": "#6e9fff",
+                    "surface-container-high": "#dfe3e6",
+                    "on-secondary-fixed": "#00278f",
+                    "error": "#b31b25",
+                    "surface-bright": "#f5f7f8",
+                    "tertiary": "#893c92",
+                    "on-primary-fixed-variant": "#002a62",
+                    "error-dim": "#9f0519",
+                    "surface-container-low": "#eef1f3",
+                    "inverse-on-surface": "#9a9d9f",
+                    "on-primary-fixed": "#000000",
+                    "secondary": "#3a53b7",
+                    "tertiary-fixed": "#f199f7",
+                    "primary-container": "#6e9fff",
+                    "surface-variant": "#d9dde0",
+                    "surface-dim": "#d0d5d8",
+                    "inverse-surface": "#0b0f10",
+                    "on-tertiary": "#ffeefb",
+                    "on-secondary": "#f2f1ff",
+                    "on-tertiary-fixed": "#3e0047",
+                    "background": "#f5f7f8",
+                    "outline-variant": "#abadaf",
+                    "error-container": "#fb5151",
+                    "outline": "#747779",
+                    "surface-container": "#e5e9eb",
+                    "on-tertiary-container": "#5e106a",
+                    "on-error-container": "#570008",
+                    "on-surface-variant": "#595c5e",
+                    "surface-container-highest": "#d9dde0",
+                    "on-surface": "#2c2f31",
+                    "secondary-fixed": "#c7cfff",
+                    "secondary-dim": "#2c47ab"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Plus Jakarta Sans"],
+                    "display": ["Plus Jakarta Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { background-color: #f5f7f8; color: theme('colors.on-surface'); font-family: theme('fontFamily.body'); }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="bg-white/80 dark:bg-slate-900/80 backdrop-blur-md shadow-[0_4px_20px_rgba(44,47,49,0.04)] sticky top-0 z-50 w-full">
+<div class="flex items-center justify-between px-6 py-4 w-full max-w-3xl mx-auto">
+<div class="flex items-center gap-4">
+<h1 class="font-['Plus_Jakarta_Sans'] font-extrabold text-blue-500 text-xl tracking-tight">스펙모아.zip</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="text-on-surface hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors p-2 rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-on-surface hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors p-2 rounded-full active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-grow w-full max-w-3xl mx-auto pb-24 pt-4 px-4 flex flex-col gap-6">
+<!-- Search Bar -->
+<!-- Section Heading -->
+<div>
+<h2 class="font-headline font-extrabold text-2xl text-on-background">탐색</h2>
+<p class="font-body text-sm text-on-surface-variant mt-1">관심 있는 자격증을 찾아보세요</p>
+</div><div class="relative w-full">
+<span class="material-symbols-outlined absolute left-4 font-normal top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">search</span>
+<input class="w-full bg-surface-container-lowest text-on-surface rounded-full py-3 pl-12 pr-4 outline-none focus:ring-2 focus:ring-primary shadow-[0_4px_20px_rgba(44,47,49,0.04)] transition-all font-body text-sm placeholder:text-on-surface-variant border-none" placeholder="자격증 검색" type="text">
+</div>
+<!-- Category Chips -->
+<div class="flex gap-3 overflow-x-auto hide-scrollbar pb-2 pt-1 px-1 -mx-1">
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-primary text-on-primary font-label text-sm font-medium shadow-[0_4px_12px_rgba(59,130,246,0.2)] active:scale-95 transition-all duration-200">전체</button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-surface-container-lowest text-on-surface-variant border border-outline-variant font-label text-sm font-medium hover:bg-surface-variant transition-colors active:scale-95 transition-all duration-200">IT</button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-surface-container-lowest text-on-surface-variant border border-outline-variant font-label text-sm font-medium hover:bg-surface-variant transition-colors active:scale-95 transition-all duration-200">어학</button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-surface-container-lowest text-on-surface-variant border border-outline-variant font-label text-sm font-medium hover:bg-surface-variant transition-colors active:scale-95 transition-all duration-200">전기</button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-surface-container-lowest text-on-surface-variant border border-outline-variant font-label text-sm font-medium hover:bg-surface-variant transition-colors active:scale-95 transition-all duration-200">금융</button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-surface-container-lowest text-on-surface-variant border border-outline-variant font-label text-sm font-medium hover:bg-surface-variant transition-colors active:scale-95 transition-all duration-200">공기업</button>
+<button class="whitespace-nowrap px-5 py-2 rounded-full bg-surface-container-lowest text-on-surface-variant border border-outline-variant font-label text-sm font-medium hover:bg-surface-variant transition-colors active:scale-95 transition-all duration-200">기타</button>
+</div>
+<!-- Certification Grid -->
+<div class="grid grid-cols-2 gap-4">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_20px_rgba(44,47,49,0.04)] flex flex-col group hover:shadow-[0_8px_30px_rgba(44,47,49,0.08)] transition-all cursor-pointer border border-transparent hover:border-primary/20 active:scale-95 active:bg-slate-50 transition-all duration-200">
+<div class="mb-3">
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px] font-bold tracking-wider font-label uppercase">IT</span>
+</div>
+<h3 class="font-headline font-bold text-on-background text-base mb-4 line-clamp-2 leading-tight">SQLD</h3>
+<div class="mt-auto flex flex-col gap-2 text-xs text-on-surface-variant font-label">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-medium text-on-surface">4.5</span><span class="text-on-surface-variant/70">/5.0</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">group</span>
+<span>2,450명 학습 중</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_20px_rgba(44,47,49,0.04)] flex flex-col group hover:shadow-[0_8px_30px_rgba(44,47,49,0.08)] transition-all cursor-pointer border border-transparent hover:border-primary/20 active:scale-95 active:bg-slate-50 transition-all duration-200">
+<div class="mb-3">
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px] font-bold tracking-wider font-label uppercase">IT</span>
+</div>
+<h3 class="font-headline font-bold text-on-background text-base mb-4 line-clamp-2 leading-tight">네트워크관리사 2급</h3>
+<div class="mt-auto flex flex-col gap-2 text-xs text-on-surface-variant font-label">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-medium text-on-surface">4.2</span><span class="text-on-surface-variant/70">/5.0</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">group</span>
+<span>1,200명 학습 중</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_20px_rgba(44,47,49,0.04)] flex flex-col group hover:shadow-[0_8px_30px_rgba(44,47,49,0.08)] transition-all cursor-pointer border border-transparent hover:border-primary/20 active:scale-95 active:bg-slate-50 transition-all duration-200">
+<div class="mb-3">
+<span class="bg-tertiary/10 text-tertiary px-2 py-0.5 rounded text-[10px] font-bold tracking-wider font-label uppercase">어학</span>
+</div>
+<h3 class="font-headline font-bold text-on-background text-base mb-4 line-clamp-2 leading-tight">TOEIC</h3>
+<div class="mt-auto flex flex-col gap-2 text-xs text-on-surface-variant font-label">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-medium text-on-surface">4.8</span><span class="text-on-surface-variant/70">/5.0</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">group</span>
+<span>8,900명 학습 중</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_20px_rgba(44,47,49,0.04)] flex flex-col group hover:shadow-[0_8px_30px_rgba(44,47,49,0.08)] transition-all cursor-pointer border border-transparent hover:border-primary/20 active:scale-95 active:bg-slate-50 transition-all duration-200">
+<div class="mb-3">
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px] font-bold tracking-wider font-label uppercase">IT</span>
+</div>
+<h3 class="font-headline font-bold text-on-background text-base mb-4 line-clamp-2 leading-tight">정보처리기사</h3>
+<div class="mt-auto flex flex-col gap-2 text-xs text-on-surface-variant font-label">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-medium text-on-surface">4.6</span><span class="text-on-surface-variant/70">/5.0</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">group</span>
+<span>5,320명 학습 중</span>
+</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_20px_rgba(44,47,49,0.04)] flex flex-col group hover:shadow-[0_8px_30px_rgba(44,47,49,0.08)] transition-all cursor-pointer border border-transparent hover:border-primary/20 active:scale-95 active:bg-slate-50 transition-all duration-200">
+<div class="mb-3">
+<span class="bg-orange-500/10 text-orange-600 px-2 py-0.5 rounded text-[10px] font-bold tracking-wider font-label uppercase">전기</span>
+</div>
+<h3 class="font-headline font-bold text-on-background text-base mb-4 line-clamp-2 leading-tight">전기기사</h3>
+<div class="mt-auto flex flex-col gap-2 text-xs text-on-surface-variant font-label">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-medium text-on-surface">4.7</span><span class="text-on-surface-variant/70">/5.0</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">group</span>
+<span>6,800명 학습 중</span>
+</div>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_20px_rgba(44,47,49,0.04)] flex flex-col group hover:shadow-[0_8px_30px_rgba(44,47,49,0.08)] transition-all cursor-pointer border border-transparent hover:border-primary/20 active:scale-95 active:bg-slate-50 transition-all duration-200">
+<div class="mb-3">
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px] font-bold tracking-wider font-label uppercase">IT</span>
+</div>
+<h3 class="font-headline font-bold text-on-background text-base mb-4 line-clamp-2 leading-tight">컴퓨터활용능력 1급</h3>
+<div class="mt-auto flex flex-col gap-2 text-xs text-on-surface-variant font-label">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-medium text-on-surface">4.4</span><span class="text-on-surface-variant/70">/5.0</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">group</span>
+<span>12,500명 학습 중</span>
+</div>
+</div>
+</div>
+<!-- Card 7 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_20px_rgba(44,47,49,0.04)] flex flex-col group hover:shadow-[0_8px_30px_rgba(44,47,49,0.08)] transition-all cursor-pointer border border-transparent hover:border-primary/20 active:scale-95 active:bg-slate-50 transition-all duration-200">
+<div class="mb-3">
+<span class="bg-primary/10 text-primary px-2 py-0.5 rounded text-[10px] font-bold tracking-wider font-label uppercase">IT</span>
+</div>
+<h3 class="font-headline font-bold text-on-background text-base mb-4 line-clamp-2 leading-tight">ADsP</h3>
+<div class="mt-auto flex flex-col gap-2 text-xs text-on-surface-variant font-label">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-medium text-on-surface">4.3</span><span class="text-on-surface-variant/70">/5.0</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">group</span>
+<span>3,100명 학습 중</span>
+</div>
+</div>
+</div>
+<!-- Card 8 -->
+<div class="bg-surface-container-lowest rounded-xl p-4 shadow-[0_4px_20px_rgba(44,47,49,0.04)] flex flex-col group hover:shadow-[0_8px_30px_rgba(44,47,49,0.08)] transition-all cursor-pointer border border-transparent hover:border-primary/20 active:scale-95 active:bg-slate-50 transition-all duration-200">
+<div class="mb-3">
+<span class="bg-green-500/10 text-green-600 px-2 py-0.5 rounded text-[10px] font-bold tracking-wider font-label uppercase">기타</span>
+</div>
+<h3 class="font-headline font-bold text-on-background text-base mb-4 line-clamp-2 leading-tight">GFA</h3>
+<div class="mt-auto flex flex-col gap-2 text-xs text-on-surface-variant font-label">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-medium text-on-surface">4.1</span><span class="text-on-surface-variant/70">/5.0</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">group</span>
+<span>850명 학습 중</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl shadow-[0_-8px_30px_rgba(44,47,49,0.06)] rounded-t-2xl fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 md:hidden">
+<!-- 홈 -->
+<button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-blue-500 dark:hover:text-blue-300 active:scale-90 transition-transform duration-150 w-16">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-tight">홈</span>
+</button>
+<!-- 자격증 -->
+<button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-blue-500 dark:hover:text-blue-300 active:scale-90 transition-transform duration-150 w-16">
+<span class="material-symbols-outlined mb-1" data-icon="verified">verified</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-tight">자격증</span>
+</button>
+<!-- 타이머 -->
+<button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-blue-500 dark:hover:text-blue-300 active:scale-90 transition-transform duration-150 w-16">
+<span class="material-symbols-outlined mb-1" data-icon="timer">timer</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-tight">타이머</span>
+</button>
+<!-- 탐색 (Active) -->
+<button class="flex flex-col items-center justify-center text-blue-600 dark:text-blue-400 font-bold bg-blue-50/50 dark:bg-blue-900/20 rounded-xl px-3 py-1 active:scale-90 transition-transform duration-150 w-16">
+<span class="material-symbols-outlined mb-1" data-icon="explore" style="font-variation-settings: 'FILL' 1;">explore</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-tight">탐색</span>
+</button>
+<!-- 마이 -->
+<button class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 hover:text-blue-500 dark:hover:text-blue-300 active:scale-90 transition-transform duration-150 w-16">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-['Inter'] text-[11px] font-medium tracking-tight">마이</span>
+</button>
+</nav>
+</body></html>

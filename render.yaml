@@ -1,0 +1,40 @@
+services:
+  - type: web
+    name: specmoa-api
+    runtime: node
+    plan: free
+    rootDir: server
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:prod
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_SCHEMA
+        value: public
+      - key: DB_SYNC
+        value: "false"
+      - key: DB_SSL
+        value: "true"
+      - key: CORS_ORIGIN
+        value: ""
+      - key: DATABASE_URL
+        sync: false
+      - key: QNET_SERVICE_KEY
+        sync: false
+      - key: QNET_NATIONAL_QUALIFICATION_LIST_URL
+        value: http://openapi.q-net.or.kr/api/service/rest/InquiryListNationalQualifcationSVC/getList
+      - key: QNET_CERTIFICATION_DETAIL_URL
+        value: http://openapi.q-net.or.kr/api/service/rest/InquiryInformationTradeNTQSVC/getList
+      - key: QNET_EXAM_SCHEDULE_URL
+        value: http://openapi.q-net.or.kr/api/service/rest/InquiryTestInformationNTQSVC/getJMList
+      - key: QNET_EXAM_ELIGIBILITY_URL
+        value: http://openapi.q-net.or.kr/api/service/rest/InquiryExamQualItemSVC/getList
+      - key: QNET_ACQUISITION_STAT_URL
+        value: http://openapi.q-net.or.kr/api/service/rest/InquiryQualRelaPtcondSVC/getArtlList
+      - key: QNET_MAJOR_STAT_URL
+        value: http://openapi.q-net.or.kr/api/service/rest/InquiryQualRelaPtcondSVC/getMajorList
+      - key: QNET_PASS_RATE_STAT_URL
+        value: http://openapi.q-net.or.kr/api/service/rest/InquiryEmqualPassSVC/getList
+      - key: QNET_ROUND_PASS_RATE_STAT_URL
+        value: http://openapi.q-net.or.kr/api/service/rest/InquiryQualPassRateSVC/getList

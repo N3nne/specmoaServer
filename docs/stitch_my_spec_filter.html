@@ -1,0 +1,287 @@
+<!DOCTYPE html><html lang="ko" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style class="">
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, .headline {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        /* Filter State Styles */
+        .filter-card.active {
+            background-color: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed": "#6e9fff",
+                        "on-error-container": "#570008",
+                        "on-primary-fixed": "#000000",
+                        "surface-variant": "#d9dde0",
+                        "surface-container-high": "#dfe3e6",
+                        "secondary-container": "#c7cfff",
+                        "surface-container-low": "#eef1f3",
+                        "on-secondary-fixed": "#00278f",
+                        "tertiary-container": "#f199f7",
+                        "background": "#f5f7f9",
+                        "surface": "#f5f7f9",
+                        "error-container": "#fb5151",
+                        "tertiary-dim": "#7b2f85",
+                        "secondary-dim": "#2c47ab",
+                        "on-primary": "#f0f2ff",
+                        "on-secondary-container": "#223ea2",
+                        "on-secondary": "#f2f1ff",
+                        "secondary-fixed-dim": "#b4c1ff",
+                        "on-surface-variant": "#595c5e",
+                        "primary-container": "#6e9fff",
+                        "on-tertiary-container": "#5e106a",
+                        "secondary-fixed": "#c7cfff",
+                        "on-surface": "#2c2f31",
+                        "primary": "#0057bd",
+                        "on-secondary-fixed-variant": "#2d48ac",
+                        "surface-dim": "#d0d5d8",
+                        "surface-container": "#e5e9eb",
+                        "outline": "#747779",
+                        "on-tertiary-fixed-variant": "#681c73",
+                        "error": "#b31b25",
+                        "on-primary-container": "#002150",
+                        "outline-variant": "#abadaf",
+                        "surface-container-highest": "#d9dde0",
+                        "surface-tint": "#0057bd",
+                        "tertiary": "#893c92",
+                        "primary-dim": "#004ca6",
+                        "error-dim": "#9f0519",
+                        "tertiary-fixed": "#f199f7",
+                        "on-background": "#2c2f31",
+                        "on-primary-fixed-variant": "#002a62",
+                        "inverse-on-surface": "#9a9d9f",
+                        "surface-bright": "#f5f7f9",
+                        "primary-fixed-dim": "#5391ff",
+                        "inverse-primary": "#4d8eff",
+                        "on-tertiary-fixed": "#3e0047",
+                        "on-error": "#ffefee",
+                        "on-tertiary": "#ffeefb",
+                        "secondary": "#3a53b7",
+                        "tertiary-fixed-dim": "#e28ce9",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-surface": "#0b0f10"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.5rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "2xl": "1.5rem",
+                        "3xl": "2rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full flex justify-between items-center px-6 py-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md z-50 shadow-sm shadow-blue-500/5">
+<h1 class="text-xl font-extrabold tracking-tighter text-blue-600 dark:text-blue-400 font-['Plus_Jakarta_Sans']">스펙모아.zip</h1>
+<div class="flex items-center gap-4">
+<button class="hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors p-1 rounded-full active:opacity-70">
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500">notifications</span>
+</button>
+<button class="hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors p-1 rounded-full active:opacity-70">
+<span class="material-symbols-outlined text-slate-400 dark:text-slate-500">settings</span>
+</button>
+</div>
+</header>
+<main class="max-w-md mx-auto px-6 pt-6">
+<!-- Hero Summary Section (Integrated Filters) -->
+<div class="mb-8 p-6 bg-gradient-to-br from-primary to-primary-dim rounded-3xl shadow-xl shadow-primary/20 relative overflow-hidden">
+<div class="absolute -right-4 -top-4 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+<div class="relative z-10">
+<p class="text-on-primary/80 text-sm font-medium mb-1">나의 스펙 요약</p>
+<div class="mb-6">
+<h2 class="text-on-primary text-2xl font-bold tracking-tight">전체 자격증 <span class="text-secondary-container">12</span>개</h2>
+</div>
+<div class="grid grid-cols-3 gap-3">
+<!-- Filter Area: Total -->
+<button class="filter-card active bg-white/10 hover:bg-white/20 transition-all backdrop-blur-md rounded-2xl p-3 border border-white/10 text-left active:scale-[0.98]" id="filter-all" onclick="filterSpecs('all')">
+<p class="text-white/60 text-[9px] uppercase tracking-wider font-bold mb-1">전체</p>
+<p class="text-white text-xl font-bold leading-none">12</p>
+</button>
+<!-- Filter Area: In Progress -->
+<button class="filter-card bg-white/10 hover:bg-white/20 transition-all backdrop-blur-md rounded-2xl p-3 border border-white/10 text-left active:scale-[0.98]" id="filter-progress" onclick="filterSpecs('progress')">
+<p class="text-white/60 text-[9px] uppercase tracking-wider font-bold mb-1">진행 중</p>
+<p class="text-white text-xl font-bold leading-none">3</p>
+</button>
+<!-- Filter Area: Completed -->
+<button class="filter-card bg-white/10 hover:bg-white/20 transition-all backdrop-blur-md rounded-2xl p-3 border border-white/10 text-left active:scale-[0.98]" id="filter-completed" onclick="filterSpecs('completed')">
+<p class="text-white/60 text-[9px] uppercase tracking-wider font-bold mb-1">완료됨</p>
+<p class="text-white text-xl font-bold leading-none">9</p>
+</button>
+</div>
+</div>
+</div>
+<!-- Section Title -->
+<div class="flex justify-between items-end mb-6">
+<h3 class="text-lg font-bold tracking-tight">자격증 리스트</h3>
+<span class="text-sm text-on-surface-variant font-medium">최신순</span>
+</div>
+<!-- Certification List -->
+<div class="space-y-4" id="spec-list">
+<!-- Card 1: Upcoming (In Progress) -->
+<div class="spec-item bg-surface-container-lowest p-5 rounded-2xl shadow-sm transition-all hover:shadow-md group" data-status="progress" style="opacity: 1; transform: translateY(0px); transition: 0.4s;">
+<div class="flex justify-between items-start mb-3">
+<span class="px-3 py-1 bg-blue-50 text-blue-600 text-[10px] font-extrabold rounded-full tracking-wide uppercase">IT / 개발</span>
+<span class="text-error font-bold text-sm tracking-tighter bg-error-container/10 px-2 py-0.5 rounded-lg">D-14</span>
+</div>
+<h4 class="text-on-surface text-lg font-bold leading-tight mb-2 group-hover:text-primary transition-colors">정보처리기사 실기</h4>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span class="text-xs font-medium">2024.06.24 시험 예정</span>
+</div>
+</div>
+<!-- Card 2: Completed -->
+<div class="spec-item bg-surface-container-lowest p-5 rounded-2xl shadow-sm transition-all hover:shadow-md group" data-status="completed" style="opacity: 1; transform: translateY(0px); transition: 0.4s;">
+<div class="flex justify-between items-start mb-3">
+<span class="px-3 py-1 bg-purple-50 text-purple-600 text-[10px] font-extrabold rounded-full tracking-wide uppercase">어학</span>
+<div class="flex items-center gap-1 text-primary font-bold text-xs">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                    인증됨
+                </div>
+</div>
+<h4 class="text-on-surface text-lg font-bold leading-tight mb-2 group-hover:text-primary transition-colors">TOEIC Speaking AL</h4>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">workspace_premium</span>
+<span class="text-xs font-medium">취득일: 2024.03.12</span>
+</div>
+</div>
+<!-- Card 3: Upcoming (In Progress) -->
+<div class="spec-item bg-surface-container-lowest p-5 rounded-2xl shadow-sm transition-all hover:shadow-md group" data-status="progress" style="opacity: 1; transform: translateY(0px); transition: 0.4s;">
+<div class="flex justify-between items-start mb-3">
+<span class="px-3 py-1 bg-orange-50 text-orange-600 text-[10px] font-extrabold rounded-full tracking-wide uppercase">디자인</span>
+<span class="text-on-surface-variant font-bold text-sm tracking-tighter bg-surface-container/50 px-2 py-0.5 rounded-lg">D-45</span>
+</div>
+<h4 class="text-on-surface text-lg font-bold leading-tight mb-2 group-hover:text-primary transition-colors">GTQ 그래픽기술자격 1급</h4>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">calendar_today</span>
+<span class="text-xs font-medium">2024.07.20 시험 예정</span>
+</div>
+</div>
+<!-- Card 4: Completed -->
+<div class="spec-item bg-surface-container-lowest p-5 rounded-2xl shadow-sm transition-all hover:shadow-md group" data-status="completed" style="opacity: 1; transform: translateY(0px); transition: 0.4s;">
+<div class="flex justify-between items-start mb-3">
+<span class="px-3 py-1 bg-blue-50 text-blue-600 text-[10px] font-extrabold rounded-full tracking-wide uppercase">IT / 개발</span>
+<div class="flex items-center gap-1 text-primary font-bold text-xs">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                    인증됨
+                </div>
+</div>
+<h4 class="text-on-surface text-lg font-bold leading-tight mb-2 group-hover:text-primary transition-colors">AWS Cloud Practitioner</h4>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">workspace_premium</span>
+<span class="text-xs font-medium">취득일: 2024.01.05</span>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB -->
+<button class="fixed bottom-28 right-6 w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg shadow-primary/30 flex items-center justify-center transition-transform active:scale-95 z-40">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl shadow-[0_-4px_20px_0_rgba(0,0,0,0.03)] rounded-t-3xl">
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-1 hover:text-blue-500 transition-all">
+<span class="material-symbols-outlined">home</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">홈</span>
+</div>
+<div class="flex flex-col items-center justify-center text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 rounded-2xl px-3 py-1 active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">자격증</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-1 hover:text-blue-500 transition-all">
+<span class="material-symbols-outlined">timer</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">타이머</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-1 hover:text-blue-500 transition-all">
+<span class="material-symbols-outlined">explore</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">탐색</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-1 hover:text-blue-500 transition-all">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Plus_Jakarta_Sans'] text-[11px] font-semibold">마이</span>
+</div>
+</nav>
+<script>
+    function filterSpecs(filter) {
+        // Update active card UI
+        document.querySelectorAll('.filter-card').forEach(card => {
+            card.classList.remove('active');
+        });
+        document.getElementById('filter-' + filter).classList.add('active');
+
+        // Filter the list
+        const items = document.querySelectorAll('.spec-item');
+        items.forEach(item => {
+            if (filter === 'all') {
+                item.style.display = 'block';
+                item.style.opacity = '0';
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transition = 'opacity 0.3s ease';
+                }, 10);
+            } else {
+                if (item.getAttribute('data-status') === filter) {
+                    item.style.display = 'block';
+                    item.style.opacity = '0';
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transition = 'opacity 0.3s ease';
+                    }, 10);
+                } else {
+                    item.style.display = 'none';
+                }
+            }
+        });
+    }
+
+    // Initialize with a slight animation
+    window.onload = () => {
+        const items = document.querySelectorAll('.spec-item');
+        items.forEach((item, index) => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(10px)';
+            setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+                item.style.transition = 'all 0.4s ease';
+            }, index * 50);
+        });
+    };
+</script>
+
+
+</body></html>

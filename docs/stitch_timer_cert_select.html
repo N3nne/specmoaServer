@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#595c5e",
+                        "tertiary-container": "#f199f7",
+                        "on-primary-container": "#002150",
+                        "surface-dim": "#d0d5d8",
+                        "on-tertiary-fixed": "#3e0047",
+                        "on-primary": "#f0f2ff",
+                        "on-background": "#2c2f31",
+                        "on-tertiary": "#ffeefb",
+                        "inverse-primary": "#4d8eff",
+                        "surface-container-highest": "#d9dde0",
+                        "tertiary-dim": "#7b2f85",
+                        "primary-fixed-dim": "#5391ff",
+                        "outline": "#747779",
+                        "on-secondary-container": "#223ea2",
+                        "on-primary-fixed": "#000000",
+                        "on-secondary": "#f2f1ff",
+                        "primary-dim": "#004ca6",
+                        "on-secondary-fixed": "#00278f",
+                        "surface-container": "#e5e9eb",
+                        "on-tertiary-container": "#5e106a",
+                        "error-dim": "#9f0519",
+                        "error": "#b31b25",
+                        "primary-fixed": "#6e9fff",
+                        "surface-container-low": "#eef1f3",
+                        "primary-container": "#6e9fff",
+                        "tertiary-fixed": "#f199f7",
+                        "background": "#f5f7f9",
+                        "inverse-surface": "#0b0f10",
+                        "inverse-on-surface": "#9a9d9f",
+                        "surface-bright": "#f5f7f9",
+                        "secondary-fixed": "#c7cfff",
+                        "outline-variant": "#abadaf",
+                        "on-primary-fixed-variant": "#002a62",
+                        "surface-variant": "#d9dde0",
+                        "secondary-dim": "#2c47ab",
+                        "tertiary": "#893c92",
+                        "tertiary-fixed-dim": "#e28ce9",
+                        "on-surface": "#2c2f31",
+                        "surface-container-high": "#dfe3e6",
+                        "on-error-container": "#570008",
+                        "on-secondary-fixed-variant": "#2d48ac",
+                        "secondary-container": "#c7cfff",
+                        "secondary": "#3a53b7",
+                        "error-container": "#fb5151",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#b4c1ff",
+                        "on-tertiary-fixed-variant": "#681c73",
+                        "surface": "#f5f7f9",
+                        "on-error": "#ffefee",
+                        "surface-tint": "#0057bd",
+                        "primary": "#0057bd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "display": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f5f7f9; }
+        .font-headline { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .progress-arc {
+            transform: rotate(-90deg);
+            stroke-dasharray: 691; /* 2 * PI * 110 */
+            transition: stroke-dashoffset 1s linear;
+        }
+        .custom-shadow { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+        body { min-height: max(884px, 100dvh); }
+    </style>
+</head>
+<body class="text-on-surface mb-24">
+<!-- TopAppBar -->
+<header class="bg-surface-container-lowest/80 backdrop-blur-md sticky top-0 z-50 flex justify-between items-center w-full px-4 h-16 shadow-sm border-b border-outline-variant/20">
+<div class="flex items-center gap-3">
+<span class="text-xl font-black tracking-tight text-primary font-headline">스펙모아.zip</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-surface-container transition-colors rounded-full active:opacity-80">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<button class="p-2 hover:bg-surface-container transition-colors rounded-full active:opacity-80">
+<span class="material-symbols-outlined text-on-surface-variant">settings</span>
+</button>
+</div>
+</header>
+<main class="max-w-md mx-auto px-4 py-6 space-y-8">
+<!-- Header Message -->
+<section class="space-y-1">
+<h1 class="text-2xl font-bold font-headline tracking-tight text-on-surface">오늘도 열공해볼까요?</h1>
+<p class="text-on-surface-variant text-sm font-medium">당신의 성장을 응원합니다.</p>
+</section>
+<!-- Certification Selector -->
+<section class="overflow-x-auto pb-2 -mx-4 px-4 flex gap-2 no-scrollbar" id="chip-container">
+<button class="chip whitespace-nowrap px-5 py-2.5 rounded-full bg-primary text-on-primary text-sm font-semibold shadow-md transition-all duration-200 hover:scale-105 active" data-cert="정보처리기사">정보처리기사</button>
+<button class="chip whitespace-nowrap px-5 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant text-sm font-semibold hover:bg-primary-container hover:text-on-primary-container hover:scale-105 transition-all duration-200" data-cert="SQLD">SQLD</button>
+<button class="chip whitespace-nowrap px-5 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant text-sm font-semibold hover:bg-primary-container hover:text-on-primary-container hover:scale-105 transition-all duration-200" data-cert="AWS CCP">AWS CCP</button>
+<button class="chip whitespace-nowrap px-5 py-2.5 rounded-full bg-surface-container-high text-on-surface-variant text-sm font-semibold hover:bg-primary-container hover:text-on-primary-container hover:scale-105 transition-all duration-200" data-cert="토익 850+">토익 850+</button>
+</section>
+<!-- Main Timer Card -->
+<section class="bg-surface-container-lowest rounded-xl p-8 custom-shadow relative overflow-hidden text-center flex flex-col items-center border border-outline-variant/30">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-primary-fixed"></div>
+<h2 class="text-lg font-bold text-on-surface mb-8" id="timer-title">정보처리기사 실기</h2>
+<!-- Circular Progress Timer -->
+<div class="relative w-64 h-64 flex items-center justify-center mb-10">
+<svg class="w-full h-full" viewbox="0 0 256 256">
+<circle class="text-surface-container-low" cx="128" cy="128" fill="transparent" r="110" stroke="currentColor" stroke-width="12"></circle>
+<circle class="text-primary progress-arc" cx="128" cy="128" fill="transparent" id="timer-arc" r="110" stroke="currentColor" stroke-linecap="round" stroke-width="12" style="stroke-dashoffset: 691;"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-5xl font-black font-headline text-on-surface tracking-tighter" id="timer-display">01:29:18</span>
+</div>
+</div>
+<!-- Controls -->
+<div class="flex items-center gap-10 w-full max-w-[280px] justify-center">
+<button class="w-16 h-16 rounded-full bg-primary text-on-primary shadow-lg flex items-center justify-center active:scale-95 transition-all shadow-xl" id="play-pause-btn">
+<span class="material-symbols-outlined text-3xl text-on-primary" id="play-pause-icon" style="font-variation-settings: 'FILL' 1;">pause</span>
+</button>
+<button class="w-16 h-16 rounded-full bg-surface-container-high text-on-surface-variant shadow-lg flex items-center justify-center active:scale-95 transition-all border border-outline-variant/20" id="stop-btn">
+<span class="material-symbols-outlined text-3xl">stop</span>
+</button>
+</div>
+</section>
+<!-- Stats Summary -->
+<section class="grid gap-4 grid-cols-2">
+<div class="bg-surface-container-lowest rounded-xl p-5 custom-shadow border-l-4 border-primary">
+<p class="text-xs font-semibold text-on-surface-variant mb-1">오늘의 학습</p>
+<p class="text-xl font-bold font-headline text-on-surface">4h 12m</p>
+<div class="mt-2 text-[10px] text-primary flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-xs">trending_up</span>
+                    +12% 어제보다
+                </div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-5 custom-shadow border-l-4 border-tertiary">
+<p class="text-xs font-semibold text-on-surface-variant mb-1">전체 학습 시간</p>
+<p class="text-xl font-bold font-headline text-on-surface">128h 45m</p>
+<div class="mt-2 text-[10px] text-tertiary flex items-center gap-1 font-bold">
+<span class="material-symbols-outlined text-xs">military_tech</span>
+                    상위 5% 이번 달
+                </div>
+</div>
+</section>
+<!-- Recent Records -->
+<section class="space-y-4 pb-4">
+<div class="flex justify-between items-center px-1">
+<h3 class="text-lg font-bold font-headline">최근 학습 기록</h3>
+<button class="text-primary text-xs font-bold">전체보기</button>
+</div>
+<div class="space-y-3">
+<div class="bg-surface-container-lowest p-4 rounded-xl flex items-center justify-between hover:bg-surface-bright transition-colors cursor-pointer border border-transparent hover:border-surface-variant">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">history_edu</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">정보처리기사</p>
+<p class="text-[11px] text-on-surface-variant">2023.10.24 • 오후 02:30</p>
+</div>
+</div>
+<span class="text-sm font-bold text-on-surface font-headline">02:15:30</span>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl flex items-center justify-between hover:bg-surface-bright transition-colors cursor-pointer border border-transparent hover:border-surface-variant">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">database</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">SQLD 자격증</p>
+<p class="text-[11px] text-on-surface-variant">2023.10.23 • 오전 10:15</p>
+</div>
+</div>
+<span class="text-sm font-bold text-on-surface font-headline">01:45:12</span>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl flex items-center justify-between hover:bg-surface-bright transition-colors cursor-pointer border border-transparent hover:border-surface-variant">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">cloud</span>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">AWS CCP</p>
+<p class="text-[11px] text-on-surface-variant">2023.10.22 • 오후 08:45</p>
+</div>
+</div>
+<span class="text-sm font-bold text-on-surface font-headline">00:58:20</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-surface-container-lowest/90 backdrop-blur-lg rounded-t-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)] border-t border-outline-variant/20">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-headline text-[10px] font-semibold">홈</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined">verified</span>
+<span class="font-headline text-[10px] font-semibold">자격증</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary transition-all duration-300 active:scale-90" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">timer</span>
+<span class="font-headline text-[10px] font-semibold">타이머</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-headline text-[10px] font-semibold">탐색</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all active:scale-90" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-headline text-[10px] font-semibold">마이</span>
+</a>
+</nav>
+<script>
+        // Timer functionality
+        let seconds = 5358; // Started at 01:29:18 approx
+        let isRunning = true;
+        let timerInterval;
+
+        const timerDisplay = document.getElementById('timer-display');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const playPauseIcon = document.getElementById('play-pause-icon');
+        const stopBtn = document.getElementById('stop-btn');
+        const timerArc = document.getElementById('timer-arc');
+
+        function formatTime(totalSeconds) {
+            const hrs = Math.floor(totalSeconds / 3600);
+            const mins = Math.floor((totalSeconds % 3600) / 60);
+            const secs = totalSeconds % 60;
+            return `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function updateDisplay() {
+            timerDisplay.innerText = formatTime(seconds);
+            const totalArc = 691;
+            const progress = (seconds % 3600) / 3600; 
+            timerArc.style.strokeDashoffset = totalArc * (1 - progress);
+        }
+
+        function toggleTimer() {
+            if (isRunning) {
+                clearInterval(timerInterval);
+                playPauseIcon.innerText = 'play_arrow';
+                playPauseIcon.style.fontVariationSettings = "'FILL' 1";
+            } else {
+                timerInterval = setInterval(() => {
+                    seconds++;
+                    updateDisplay();
+                }, 1000);
+                playPauseIcon.innerText = 'pause';
+                playPauseIcon.style.fontVariationSettings = "'FILL' 1";
+            }
+            isRunning = !isRunning;
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            seconds = 0;
+            updateDisplay();
+            playPauseIcon.innerText = 'play_arrow';
+            playPauseIcon.style.fontVariationSettings = "'FILL' 1";
+        }
+
+        playPauseBtn.addEventListener('click', toggleTimer);
+        stopBtn.addEventListener('click', stopTimer);
+
+        // Initial Start
+        timerInterval = setInterval(() => {
+            seconds++;
+            updateDisplay();
+        }, 1000);
+
+        // Certificate selection
+        const chips = document.querySelectorAll('.chip');
+        const timerTitle = document.getElementById('timer-title');
+
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                // Update UI state of chips
+                chips.forEach(c => {
+                    c.classList.remove('bg-primary', 'text-on-primary', 'shadow-md', 'active');
+                    c.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+                });
+                
+                chip.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+                chip.classList.add('bg-primary', 'text-on-primary', 'shadow-md', 'active');
+
+                // Update timer title based on selection
+                const certName = chip.getAttribute('data-cert');
+                // Adding ' 실기' for common certs that might have it, or just name for others
+                if(certName === '정보처리기사') {
+                    timerTitle.innerText = `${certName} 실기`;
+                } else {
+                    timerTitle.innerText = certName;
+                }
+            });
+        });
+    </script>
+</body></html>
