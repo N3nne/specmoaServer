@@ -1,7 +1,7 @@
 name: specmoa_zip_ui
 description: Flutter implementation scaffold based on the Stitch specmoa.zip UI design.
 publish_to: "none"
-version: 0.1.0+1
+version: 0.1.2+3
 
 environment:
   sdk: ">=3.4.0 <4.0.0"
