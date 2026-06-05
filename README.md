@@ -33,11 +33,10 @@ copy .env.example .env
 npm run start:dev
 ```
 
-The server starts with these core resources:
+서버는 다음과 같은 핵심 리소스로 시작합니다.
 
-- Certifications and exam schedules from external API sync
-- User-specific certification tracking
-- Study tasks
-- Study sessions
+- 외부 API 동기화를 통한 자격증 및 시험 일정
+- 사용자별 자격증 관리
+- 학습 세션
 
-For early local development, user-scoped server endpoints use `x-user-id`; without it, the server falls back to a demo user.
+초기 로컬 개발 환경에서는 사용자 범위 서버 엔드포인트에 `x-user-id`를 사용합니다. `x-user-id`가 없으면 서버는 데모 사용자를 사용합니다.
