@@ -10,7 +10,7 @@ docs/     공통 디자인 및 아키텍쳐
 
 ## Release
 ```text
-
+** iOS는 미구현 / Android apk만 구현, 동작 가능
 release 0.1.0 : 구현 완료된 내용을 apk 파일로 첫 구현
 
 ```
