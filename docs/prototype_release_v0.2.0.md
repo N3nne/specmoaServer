@@ -6,7 +6,7 @@
 
 - 기존 0.1.x는 보존하고 다음 버전 0.2.0으로 코드와 APK를 저장한다.
 - GitHub 저장소: `N3nne/specmoaServer`.
-- 별도 소스 브랜치: `codex/prototype-v0.2.0`. main 자동 배포와 분리한다.
+- 별도 소스 브랜치: `specmoa_ver2(0.2.0)` (사용자 요청으로 `codex/prototype-v0.2.0`에서 변경). main 자동 배포와 분리한다.
 - 클라우드 호환성·휴대폰 검증 전에는 APK를 검증 완료 버전으로 공개하지 않는다.
 - UI를 새로 만들거나 실제 사용자 정보를 Gemini에 전송하지 않는다.
 
@@ -71,9 +71,9 @@ Render 설정에는 가상 공고 사용을 명시하고(`JOBS_SOURCE=demo`) 외
 ## GitHub 저장 완료
 
 - 소스 커밋: `8d7a744` (`Prepare v0.2.0 spec management prototype`).
-- 소스: https://github.com/N3nne/specmoaServer/tree/codex/prototype-v0.2.0
+- 소스: https://github.com/N3nne/specmoaServer/tree/specmoa_ver2%280.2.0%29
 - 초안 릴리즈 ID: `424470818`, 태그 예정 이름 `v0.2.0-prototype`.
-- 초안: https://github.com/N3nne/specmoaServer/releases/tag/untagged-7f71cd963a4741b9892d
+- 초안: https://github.com/N3nne/specmoaServer/releases/tag/untagged-de4edeb0f9a21e846de9
 - 초안이므로 저장소 소유자 권한으로 확인하며, 공개 다운로드/QR은 아직 제공하지 않는다.
 - APK: `release/specmoa-prototype-v0.2.0.apk`, 56,216,218 bytes.
 - APK SHA-256: `3e6f5aa44f2d5a993303e7fedf0cbe1cd8e4728c8b5e5f715a4356edc850cd24`.
@@ -142,3 +142,10 @@ Supabase 주소 수정 후에는 승인된 기존 프로젝트의 Session pooler
 - 배포 로그의 의존성 경고를 별도로 확인했다. `npm audit --omit=dev --json` 기준 런타임 의존성 경고 11개(높음 4, 보통 7, 치명적 0)가 남아 있다. 관련 패키지는 @nestjs/platform-express, body-parser, lodash, multer 등이며 정식 공개 전에 우선 보완해야 한다.
 - 감사 도구가 메이저 버전 변경을 포함한 해결책을 제시하므로 이번 배포에서 `npm audit fix --force`를 실행하지 않았다. 별도 변경·회귀 검증이 필요하다.
 - 이 검증 기록만 저장하는 후속 커밋에는 `[skip render]`를 사용해 불필요한 자동 재배포를 생략한다. [Render 공식 안내](https://render.com/docs/deploys#skipping-an-auto-deploy)
+
+## 휴대폰 설치 및 브랜치 변경 요청 (2026-10-27)
+
+- GitHub와 로컬 버전 브랜치를 `specmoa_ver2(0.2.0)`으로 변경하고 원격 추적도 갱신했다. 기존 main과 Render 배포는 변경하지 않았다.
+- 기존 릴리스 ID `424470818`의 APK와 체크섬은 uploaded 상태이며 APK digest가 로컬 SHA-256과 일치한다. 같은 파일을 중복 업로드하지 않았다.
+- 릴리스 대상 브랜치를 새 이름으로 갱신했다. 예정 태그는 `v0.2.0-prototype`이며, 공개 여부 확인 전에는 초안을 유지한다.
+- Windows에 삼성 S24가 연결되어 있지만 ADB 기기는 아직 감지되지 않는다. USB 디버깅 허용을 요청했으며 설치/실행 검증은 미완료다.
