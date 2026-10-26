@@ -25,8 +25,8 @@
 - [x] 새 브랜치 생성 및 원격 README 보존.
 - [x] 로컬 전용 클라우드 설정 파일 준비 및 Git 제외 확인.
 - [x] Android APK 빌드 및 패키지/서명/서버 주소 점검.
-- [x] 변경 파일·비밀정보 점검. 커밋·버전 브랜치 푸시는 진행 중.
-- [ ] GitHub v0.2.0 초안 릴리즈에 APK와 SHA-256 저장.
+- [x] 변경 파일·비밀정보 점검, 앱/서버 소스 커밋·버전 브랜치 푸시.
+- [x] GitHub v0.2.0 초안 릴리즈에 APK와 SHA-256 저장.
 - [ ] Supabase 백업·스키마 확인·필요 마이그레이션·가상 공고 준비.
 - [ ] Render 최신 서버 배포 및 호환성 확인.
 - [ ] 실기기 검증 후 공개 다운로드·QR 준비.
@@ -67,3 +67,26 @@ Supabase 주소 수정 후 읽기 전용 점검, public 스키마 백업, 로컬
 
 Render 설정에는 가상 공고 사용을 명시하고(`JOBS_SOURCE=demo`) 외부 AI 시연은 비활성화했다.
 이는 소스 설정이며, 기존 Render 서비스의 실행 환경이 이미 갱신되었다는 뜻은 아니다.
+
+## GitHub 저장 완료
+
+- 소스 커밋: `8d7a744` (`Prepare v0.2.0 spec management prototype`).
+- 소스: https://github.com/N3nne/specmoaServer/tree/codex/prototype-v0.2.0
+- 초안 릴리즈 ID: `424470818`, 태그 예정 이름 `v0.2.0-prototype`.
+- 초안: https://github.com/N3nne/specmoaServer/releases/tag/untagged-7f71cd963a4741b9892d
+- 초안이므로 저장소 소유자 권한으로 확인하며, 공개 다운로드/QR은 아직 제공하지 않는다.
+- APK: `release/specmoa-prototype-v0.2.0.apk`, 56,216,218 bytes.
+- APK SHA-256: `3e6f5aa44f2d5a993303e7fedf0cbe1cd8e4728c8b5e5f715a4356edc850cd24`.
+- APK와 SHA-256 파일을 초안에 업로드했고 GitHub가 반환한 APK digest가 로컬 해시와 일치했다.
+
+## 현재 재개 지점
+
+Supabase 주소 수정 후에는 승인된 기존 프로젝트의 Session pooler에 도달했으나 비밀번호 인증이 `28P01`로 거절됐다.
+자동 반복 접속을 중단했다. 클라우드 백업·마이그레이션·가상 공고 입력·Render 배포는 아직 수행하지 않았다.
+사용자가 DB 비밀번호 확인 위치를 질문했으며, 다음 답변에서 Render에 저장된 DATABASE_URL 확인 또는 Supabase Database > Settings 비밀번호 재설정 경로를 안내한다.
+
+비밀번호 수정 완료라는 새 응답을 받으면 파일을 다시 읽고 한 번 접속을 확인한다. 기존 잘못된 비밀번호를 다시 시도하지 않는다.
+백업은 앱 public 스키마의 백업이라는 범위를 명시하고, 로컬 격리 DB 복원 검증 후에만 필요한 마이그레이션을 적용한다.
+Render는 여전히 기존 main 버전이다. API 404가 없어졌다는 검증 전에는 APK가 정상 연동된다고 보고하지 않는다.
+
+관련 실행 세션은 모두 완료했다. Android 휴대폰은 현재 연결되지 않았다.
