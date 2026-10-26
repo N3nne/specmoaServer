@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import '../models/user_spec.dart';
@@ -9,17 +7,23 @@ import 'specs/spec_register_screen.dart';
 import 'specs/spec_type_selection_screen.dart';
 
 class MySpecScreen extends StatefulWidget {
-  const MySpecScreen({this.userId, this.displayName, super.key});
+  const MySpecScreen({
+    this.userId,
+    this.displayName,
+    this.client = const UserSpecApiClient(),
+    super.key,
+  });
 
   final String? userId;
   final String? displayName;
+  final UserSpecApiClient client;
 
   @override
   State<MySpecScreen> createState() => _MySpecScreenState();
 }
 
 class _MySpecScreenState extends State<MySpecScreen> {
-  final _client = const UserSpecApiClient();
+  UserSpecApiClient get _client => widget.client;
   late Future<List<UserSpec>> _future;
 
   @override
@@ -31,7 +35,8 @@ class _MySpecScreenState extends State<MySpecScreen> {
   @override
   void didUpdateWidget(covariant MySpecScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.userId != widget.userId) {
+    if (oldWidget.userId != widget.userId ||
+        oldWidget.client != widget.client) {
       _future = _client.fetchMine();
     }
   }
@@ -63,13 +68,6 @@ class _MySpecScreenState extends State<MySpecScreen> {
               child: CustomScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
                 slivers: [
-                  SliverPersistentHeader(
-                    pinned: true,
-                    delegate: _HeaderDelegate(
-                      notification: () => _notice('새 알림이 없습니다.'),
-                      settings: () => _notice('설정은 마이 탭에서 관리할 수 있습니다.'),
-                    ),
-                  ),
                   SliverToBoxAdapter(
                     child: ResponsivePage(
                       child: Column(
@@ -115,7 +113,7 @@ class _MySpecScreenState extends State<MySpecScreen> {
                             ..._categories(items, false)
                           else
                             const _ExperienceEmpty(),
-                          const SizedBox(height: 96),
+                          const SizedBox(height: 24),
                         ],
                       ),
                     ),
@@ -207,157 +205,6 @@ class _MySpecScreenState extends State<MySpecScreen> {
         builder: (_) => SpecTypeSelectionScreen(existingCount: count)));
     if (saved != null && mounted) await _refresh();
   }
-}
-
-class _HeaderDelegate extends SliverPersistentHeaderDelegate {
-  const _HeaderDelegate({required this.notification, required this.settings});
-  final VoidCallback notification;
-  final VoidCallback settings;
-
-  @override
-  double get minExtent => 56;
-  @override
-  double get maxExtent => 56;
-
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return ClipRect(
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-        child: Container(
-          decoration: const BoxDecoration(
-            color: Color(0xE6F5F7F9),
-            border: Border(bottom: BorderSide(color: Color(0x99E5E9EB))),
-            boxShadow: [
-              BoxShadow(
-                  color: Color(0x05000000), blurRadius: 8, offset: Offset(0, 1))
-            ],
-          ),
-          child: ResponsivePage(
-            child: SizedBox(
-              height: 56,
-              child: Row(
-                children: [
-                  const _Wordmark(),
-                  const SizedBox(width: 8),
-                  const _ContextBadge(),
-                  const Spacer(),
-                  const _SyncBadge(),
-                  const SizedBox(width: 4),
-                  _HeaderIcon(
-                      icon: Icons.notifications_outlined,
-                      tooltip: '알림',
-                      onTap: notification),
-                  _HeaderIcon(
-                      icon: Icons.settings_outlined,
-                      tooltip: '설정',
-                      onTap: settings),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  @override
-  bool shouldRebuild(covariant _HeaderDelegate oldDelegate) =>
-      oldDelegate.notification != notification ||
-      oldDelegate.settings != settings;
-}
-
-class _Wordmark extends StatelessWidget {
-  const _Wordmark();
-  @override
-  Widget build(BuildContext context) {
-    return RichText(
-      text: const TextSpan(
-        style: TextStyle(
-          fontFamily: 'Plus Jakarta Sans',
-          fontSize: 17,
-          height: 1,
-          fontWeight: FontWeight.w800,
-          letterSpacing: -0.2,
-          color: _C.primary,
-        ),
-        children: [
-          TextSpan(text: '스펙모아'),
-          TextSpan(
-            text: '.zip',
-            style: TextStyle(
-                fontFamily: 'Inter',
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                color: _C.secondary),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ContextBadge extends StatelessWidget {
-  const _ContextBadge();
-  @override
-  Widget build(BuildContext context) => Container(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-        decoration: BoxDecoration(
-          color: _C.primary.withValues(alpha: .1),
-          borderRadius: BorderRadius.circular(999),
-          border: Border.all(color: _C.primary.withValues(alpha: .2)),
-        ),
-        child: const Text('My Spec',
-            style: TextStyle(
-                fontSize: 11,
-                height: 1.2,
-                fontWeight: FontWeight.w600,
-                color: _C.primary)),
-      );
-}
-
-class _SyncBadge extends StatelessWidget {
-  const _SyncBadge();
-  @override
-  Widget build(BuildContext context) => Container(
-        height: 28,
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        decoration: BoxDecoration(
-            color: _C.container, borderRadius: BorderRadius.circular(999)),
-        child: const Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            DecoratedBox(
-                decoration: BoxDecoration(
-                    color: Color(0xFF10B981), shape: BoxShape.circle),
-                child: SizedBox(width: 6, height: 6)),
-            SizedBox(width: 4),
-            Text('실시간 연동',
-                style: TextStyle(
-                    fontSize: 11,
-                    height: 1,
-                    fontWeight: FontWeight.w500,
-                    color: _C.onSurfaceVariant)),
-          ],
-        ),
-      );
-}
-
-class _HeaderIcon extends StatelessWidget {
-  const _HeaderIcon(
-      {required this.icon, required this.tooltip, required this.onTap});
-  final IconData icon;
-  final String tooltip;
-  final VoidCallback onTap;
-  @override
-  Widget build(BuildContext context) => IconButton(
-        tooltip: tooltip,
-        onPressed: onTap,
-        padding: EdgeInsets.zero,
-        constraints: const BoxConstraints.tightFor(width: 36, height: 36),
-        icon: Icon(icon, size: 20, color: _C.onSurfaceVariant),
-      );
 }
 
 class _Hero extends StatelessWidget {
@@ -484,32 +331,38 @@ class _Balance extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
             border: Border.all(color: const Color(0x26FFFFFF))),
         child: Column(children: [
-          Row(children: [
-            const _BalanceLabel(dot: Color(0xFFBFDBFE), text: '시험 · 성적'),
-            const SizedBox(width: 5),
-            Text('$completed',
-                style: const TextStyle(
-                    fontSize: 14,
-                    height: 1,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white)),
-            const Spacer(),
-            Text('총 $total건 등록',
-                style: const TextStyle(
-                    fontFamily: 'monospace',
-                    fontSize: 11,
-                    height: 1,
-                    color: Color(0xFFBFDBFE))),
-            const Spacer(),
-            const _BalanceLabel(dot: Color(0xFFD8B4FE), text: '활동 · 경험'),
-            const SizedBox(width: 5),
-            Text('$preparing',
-                style: const TextStyle(
-                    fontSize: 14,
-                    height: 1,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white)),
-          ]),
+          Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                Row(mainAxisSize: MainAxisSize.min, children: [
+                  const _BalanceLabel(dot: Color(0xFFBFDBFE), text: '시험 · 성적'),
+                  const SizedBox(width: 5),
+                  Text('$completed',
+                      style: const TextStyle(
+                          fontSize: 14,
+                          height: 1,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white)),
+                ]),
+                Text('총 $total건 등록',
+                    style: const TextStyle(
+                        fontFamily: 'monospace',
+                        fontSize: 11,
+                        height: 1,
+                        color: Color(0xFFBFDBFE))),
+                Row(mainAxisSize: MainAxisSize.min, children: [
+                  const _BalanceLabel(dot: Color(0xFFD8B4FE), text: '활동 · 경험'),
+                  const SizedBox(width: 5),
+                  Text('$preparing',
+                      style: const TextStyle(
+                          fontSize: 14,
+                          height: 1,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white)),
+                ]),
+              ]),
           const SizedBox(height: 10),
           Container(
               width: double.infinity,
@@ -666,50 +519,59 @@ class _SectionHeader extends StatelessWidget {
   final Color accent;
   @override
   Widget build(BuildContext context) => Container(
+        width: double.infinity,
         padding: const EdgeInsets.only(bottom: 4),
         decoration: const BoxDecoration(
             border: Border(bottom: BorderSide(color: Color(0xB3E5E9EB)))),
-        child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-          Text(index,
-              style: TextStyle(
-                  fontFamily: 'monospace',
-                  fontSize: 12,
-                  height: 1,
-                  fontWeight: FontWeight.w900,
-                  color: accent)),
-          const SizedBox(width: 8),
-          Expanded(
-              child: Row(children: [
-            Text(title,
-                style: const TextStyle(
-                    fontFamily: 'Plus Jakarta Sans',
-                    fontSize: 16,
-                    height: 1.2,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: -.15,
-                    color: _C.onSurface)),
-            const SizedBox(width: 6),
-            Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                    color: accent.withValues(alpha: .1),
-                    borderRadius: BorderRadius.circular(999)),
-                child: Text('$count',
+        child: Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            crossAxisAlignment: WrapCrossAlignment.center,
+            spacing: 12,
+            runSpacing: 8,
+            children: [
+              Row(mainAxisSize: MainAxisSize.min, children: [
+                Text(index,
                     style: TextStyle(
-                        fontSize: 11,
+                        fontFamily: 'monospace',
+                        fontSize: 12,
                         height: 1,
-                        fontWeight: FontWeight.w700,
-                        color: accent)))
-          ])),
-          Icon(icon, size: 13, color: accent),
-          const SizedBox(width: 4),
-          Text(trailing,
-              style: const TextStyle(
-                  fontSize: 11,
-                  height: 1.1,
-                  fontWeight: FontWeight.w500,
-                  color: _C.onSurfaceVariant)),
-        ]),
+                        fontWeight: FontWeight.w900,
+                        color: accent)),
+                const SizedBox(width: 8),
+                Flexible(
+                    child: Text(title,
+                        style: const TextStyle(
+                            fontFamily: 'SpecJakarta',
+                            fontSize: 16,
+                            height: 1.2,
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 0,
+                            color: _C.onSurface))),
+                const SizedBox(width: 6),
+                Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    decoration: BoxDecoration(
+                        color: accent.withValues(alpha: .1),
+                        borderRadius: BorderRadius.circular(999)),
+                    child: Text('$count',
+                        style: TextStyle(
+                            fontSize: 11,
+                            height: 1,
+                            fontWeight: FontWeight.w700,
+                            color: accent)))
+              ]),
+              Row(mainAxisSize: MainAxisSize.min, children: [
+                Icon(icon, size: 13, color: accent),
+                const SizedBox(width: 4),
+                Text(trailing,
+                    style: const TextStyle(
+                        fontSize: 11,
+                        height: 1.1,
+                        fontWeight: FontWeight.w500,
+                        color: _C.onSurfaceVariant)),
+              ]),
+            ]),
       );
 }
 

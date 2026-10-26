@@ -46,12 +46,6 @@ class ProfileScreen extends StatelessWidget {
       bottom: false,
       child: CustomScrollView(
         slivers: [
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: _ProfileHeaderDelegate(
-              onSettings: () => _openSettings(context),
-            ),
-          ),
           SliverToBoxAdapter(
             child: ResponsivePage(
               child: Column(
@@ -132,7 +126,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: AppSpacing.x5),
                   _LogoutTile(onTap: session.signOut),
-                  const SizedBox(height: 118),
+                  const SizedBox(height: 24),
                 ],
               ),
             ),
@@ -964,65 +958,6 @@ class _NoticeCard extends StatelessWidget {
       ),
     );
   }
-}
-
-class _ProfileHeaderDelegate extends SliverPersistentHeaderDelegate {
-  _ProfileHeaderDelegate({required this.onSettings});
-
-  final VoidCallback onSettings;
-
-  @override
-  double get minExtent => 64;
-
-  @override
-  double get maxExtent => 64;
-
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return ColoredBox(
-      color: colorScheme.surface.withValues(alpha: 0.92),
-      child: ResponsivePage(
-        padding: const EdgeInsets.symmetric(horizontal: AppSpacing.x5),
-        child: Row(
-          children: [
-            const AppLogoIcon(size: 32),
-            const SizedBox(width: AppSpacing.x2),
-            Text(
-              '스펙모아.zip',
-              style: textTheme.titleMedium?.copyWith(
-                color: colorScheme.primary,
-                fontWeight: FontWeight.w800,
-              ),
-            ),
-            const Spacer(),
-            IconButton(
-              tooltip: '알림',
-              onPressed: () {},
-              icon: const Icon(Icons.notifications_none_rounded),
-              color: colorScheme.onSurfaceVariant,
-            ),
-            IconButton(
-              tooltip: '앱 설정',
-              onPressed: onSettings,
-              icon: const Icon(Icons.settings_rounded),
-              color: colorScheme.primary,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  @override
-  bool shouldRebuild(covariant _ProfileHeaderDelegate oldDelegate) =>
-      oldDelegate.onSettings != onSettings;
 }
 
 class _SettingsHeaderDelegate extends SliverPersistentHeaderDelegate {

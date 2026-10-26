@@ -356,7 +356,7 @@ class _TimerScreenState extends State<TimerScreen> {
                               ],
                             ),
                         ],
-                        const SizedBox(height: 118),
+                        const SizedBox(height: 24),
                       ],
                     ),
                   ),

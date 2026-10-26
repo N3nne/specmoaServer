@@ -10,7 +10,6 @@ import '../services/job_api_client.dart';
 import '../widgets/responsive_page.dart';
 import '../widgets/job_ai_demo_section.dart';
 import 'job_detail_screen.dart';
-import 'profile_screen.dart';
 
 class ExploreScreen extends StatefulWidget {
   const ExploreScreen(
@@ -260,7 +259,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
         child: ResponsivePage(
           padding: EdgeInsets.zero,
           child: Column(children: [
-            _header(colors),
             Expanded(
               child: RefreshIndicator(
                 onRefresh: _refresh,
@@ -268,7 +266,7 @@ class _ExploreScreenState extends State<ExploreScreen> {
                   key: const ValueKey('job-feed'),
                   controller: _scroll,
                   physics: const AlwaysScrollableScrollPhysics(),
-                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 112),
+                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
                   children: [
                     SizedBox(height: 44, child: _searchField(colors)),
                     const SizedBox(height: 12),
@@ -348,46 +346,6 @@ class _ExploreScreenState extends State<ExploreScreen> {
       ),
     );
   }
-
-  Widget _header(_ExploreColors colors) => Container(
-        height: 64,
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        decoration: BoxDecoration(color: colors.background, boxShadow: const [
-          BoxShadow(
-              color: Color(0x0A000000), offset: Offset(0, 1), blurRadius: 8),
-        ]),
-        child: Row(children: [
-          Expanded(
-              child: Text('스펙모아.zip',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: _text(20, colors.primary,
-                      weight: FontWeight.w800, headline: true))),
-          IconButton(
-              tooltip: '알림',
-              constraints: const BoxConstraints.tightFor(width: 44, height: 44),
-              onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                      builder: (_) => const NotificationSettingsScreen())),
-              icon: Icon(Icons.notifications_none,
-                  size: 22, color: colors.secondary)),
-          const SizedBox(width: 4),
-          IconButton(
-              tooltip: '설정',
-              constraints: const BoxConstraints.tightFor(width: 44, height: 44),
-              onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute<void>(
-                      builder: (_) => const SettingsHubScreen())),
-              icon: Icon(Icons.settings_outlined,
-                  size: 22, color: colors.secondary)),
-          const SizedBox(width: 8),
-          CircleAvatar(
-              radius: 16,
-              backgroundColor: colors.primary,
-              child: Icon(Icons.person_outline,
-                  size: 18, color: colors.onPrimary)),
-        ]),
-      );
 
   Widget _searchField(_ExploreColors colors) => Row(children: [
         Expanded(

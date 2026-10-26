@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import '../auth/auth_session.dart';
+import '../widgets/main_tab_header.dart';
 import 'explore_screen.dart';
 import 'my_spec_screen.dart';
 import 'profile_screen.dart';
@@ -33,10 +34,31 @@ class _RootShellState extends State<RootShell> {
     ];
 
     return Scaffold(
-      extendBody: true,
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: screens,
+      body: SafeArea(
+        bottom: false,
+        child: Column(
+          children: [
+            MainTabHeader(
+              section: const ['My Spec', '타이머', '탐색', '마이'][_selectedIndex],
+              onNotifications: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => const NotificationSettingsScreen(),
+                ),
+              ),
+              onSettings: () => Navigator.of(context).push(
+                MaterialPageRoute<void>(
+                  builder: (_) => const SettingsHubScreen(),
+                ),
+              ),
+            ),
+            Expanded(
+              child: IndexedStack(
+                index: _selectedIndex,
+                children: screens,
+              ),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.vertical(top: Radius.circular(34)),
