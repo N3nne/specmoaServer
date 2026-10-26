@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -9,14 +11,37 @@ import 'theme/app_theme.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(SpecMoaApp());
+  runApp(const SpecMoaApp());
 }
 
-class SpecMoaApp extends StatelessWidget {
-  SpecMoaApp({super.key});
+class SpecMoaApp extends StatefulWidget {
+  const SpecMoaApp({super.key});
 
-  final AuthSession _session = AuthSession();
-  final AppSettingsController _settings = AppSettingsController()..load();
+  @override
+  State<SpecMoaApp> createState() => _SpecMoaAppState();
+}
+
+class _SpecMoaAppState extends State<SpecMoaApp> {
+  late final AuthSession _session;
+  late final AppSettingsController _settings;
+  late final Future<void> _settingsReady;
+
+  @override
+  void initState() {
+    super.initState();
+    _session = AuthSession()..restore();
+    _settings = AppSettingsController();
+    _settingsReady = _settings.load().catchError((Object _) {
+      debugPrint('앱 설정을 불러오지 못해 기본값을 사용합니다.');
+    });
+  }
+
+  @override
+  void dispose() {
+    _session.dispose();
+    unawaited(_settingsReady.then((_) => _settings.dispose()));
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

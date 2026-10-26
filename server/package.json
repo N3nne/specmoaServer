@@ -1,6 +1,6 @@
 {
   "name": "specmoa-server",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "NestJS API server for specmoa.zip.",
   "engines": {
@@ -13,16 +13,23 @@
     "start:prod": "node dist/main.js",
     "lint": "eslint \"src/**/*.ts\"",
     "format": "prettier --write \"src/**/*.ts\"",
-    "typeorm": "typeorm-ts-node-commonjs"
+    "typeorm": "typeorm-ts-node-commonjs",
+    "db:migrate": "typeorm-ts-node-commonjs migration:run -d src/database/data-source.ts",
+    "db:migrations": "typeorm-ts-node-commonjs migration:show -d src/database/data-source.ts",
+    "jobs:seed": "ts-node src/jobs/seed-demo-jobs.ts",
+    "ai:demo": "ts-node src/ai/run-demo.ts",
+    "test": "node --test -r ts-node/register test/spec-policy.test.ts test/auth-spec-api.test.ts test/postgres-specs.test.ts test/jobs.test.ts test/postgres-jobs.test.ts test/ai.test.ts test/career.test.ts test/postgres-career.test.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.4.15",
     "@nestjs/config": "^3.3.0",
     "@nestjs/core": "^10.4.15",
+    "@nestjs/jwt": "^12.0.3",
     "@nestjs/platform-express": "^10.4.15",
     "@nestjs/typeorm": "^10.0.2",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
+    "dotenv": "^18.0.7",
     "fast-xml-parser": "^5.8.0",
     "pg": "^8.13.1",
     "reflect-metadata": "^0.2.2",

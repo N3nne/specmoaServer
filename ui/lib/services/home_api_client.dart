@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'authenticated_client.dart';
 
 import '../config/app_config.dart';
 import '../models/home_data.dart';
@@ -11,7 +12,7 @@ class HomeApiClient {
   final http.Client? _client;
 
   Future<HomeData> fetchHome({String? userId}) async {
-    final client = _client ?? http.Client();
+    final client = _client ?? AuthenticatedClient();
 
     try {
       final response = await client.get(

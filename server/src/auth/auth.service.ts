@@ -3,6 +3,7 @@ import { randomBytes, scrypt as scryptCallback, timingSafeEqual } from 'crypto';
 import { promisify } from 'util';
 
 import { UsersService } from '../users/users.service';
+import { AuthSessionsService } from './auth-sessions.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { RequestPasswordResetDto } from './dto/request-password-reset.dto';
@@ -11,7 +12,7 @@ const scrypt = promisify(scryptCallback);
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly users: UsersService) {}
+  constructor(private readonly users: UsersService, private readonly sessions: AuthSessionsService) {}
 
   async register(dto: RegisterDto) {
     const user = await this.users.createLocalUser({
@@ -20,7 +21,7 @@ export class AuthService {
       passwordHash: await this.hashPassword(dto.password),
     });
 
-    return this.toAuthResponse(user);
+    return this.sessions.create(user);
   }
 
   async login(dto: LoginDto) {
@@ -34,7 +35,7 @@ export class AuthService {
       throw new UnauthorizedException('이메일 또는 비밀번호를 확인해주세요.');
     }
 
-    return this.toAuthResponse(user);
+    return this.sessions.create(user);
   }
 
   requestPasswordReset(_dto: RequestPasswordResetDto) {
@@ -61,13 +62,4 @@ export class AuthService {
     return stored.length === derived.length && timingSafeEqual(stored, derived);
   }
 
-  private toAuthResponse(user: { id: string; email: string; displayName: string }) {
-    return {
-      user: {
-        id: user.id,
-        email: user.email,
-        displayName: user.displayName,
-      },
-    };
-  }
 }

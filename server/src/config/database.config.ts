@@ -16,7 +16,7 @@ export function databaseConfig(): TypeOrmModuleOptions {
     schema: process.env.DB_SCHEMA || 'public',
     autoLoadEntities: true,
     synchronize: process.env.DB_SYNC === 'true',
-    logging: process.env.NODE_ENV !== 'production',
+    logging: process.env.NODE_ENV === 'development',
     ssl: useSsl ? { rejectUnauthorized: false } : false,
   };
 }

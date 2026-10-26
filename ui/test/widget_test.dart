@@ -4,7 +4,7 @@ import 'package:specmoa_zip_ui/main.dart';
 
 void main() {
   testWidgets('SpecMoa app renders root shell', (WidgetTester tester) async {
-    await tester.pumpWidget(SpecMoaApp());
+    await tester.pumpWidget(const SpecMoaApp());
 
     expect(find.byType(SpecMoaApp), findsOneWidget);
   });

@@ -4,19 +4,23 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../models/study_session_data.dart';
-import '../models/user_certification_data.dart';
+import '../models/user_spec.dart';
 import '../services/study_session_api_client.dart';
-import '../services/user_certification_api_client.dart';
+import '../services/user_spec_api_client.dart';
 import '../theme/app_theme.dart';
 import '../widgets/responsive_page.dart';
 
 class TimerScreen extends StatefulWidget {
   const TimerScreen({
     this.userId,
+    this.specClient = const UserSpecApiClient(),
+    this.sessionClient = const StudySessionApiClient(),
     super.key,
   });
 
   final String? userId;
+  final UserSpecApiClient specClient;
+  final StudySessionApiClient sessionClient;
 
   @override
   State<TimerScreen> createState() => _TimerScreenState();
@@ -25,9 +29,12 @@ class TimerScreen extends StatefulWidget {
 class _TimerScreenState extends State<TimerScreen> {
   static const _maxSeconds = 60 * 60;
 
-  final _certificationClient = const UserCertificationApiClient();
-  final _sessionClient = const StudySessionApiClient();
+  UserSpecApiClient get _certificationClient => widget.specClient;
+  StudySessionApiClient get _sessionClient => widget.sessionClient;
   late Future<_TimerPageData> _future;
+  _TimerPageData? _lastData;
+  int _loadRevision = 0;
+  int _timerRevision = 0;
 
   Timer? _ticker;
   DateTime? _startedAt;
@@ -40,12 +47,15 @@ class _TimerScreenState extends State<TimerScreen> {
   void initState() {
     super.initState();
     _future = _load();
+    UserSpecApiClient.changes.addListener(_onSpecsChanged);
   }
 
   @override
   void didUpdateWidget(covariant TimerScreen oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.userId != widget.userId) {
+      _lastData = null;
+      _selectedCertificationId = null;
       _resetTimer();
       _future = _load();
     }
@@ -53,44 +63,62 @@ class _TimerScreenState extends State<TimerScreen> {
 
   @override
   void dispose() {
+    _loadRevision++;
+    _timerRevision++;
+    UserSpecApiClient.changes.removeListener(_onSpecsChanged);
     _ticker?.cancel();
     super.dispose();
   }
 
+  void _onSpecsChanged() {
+    if (mounted) _refresh();
+  }
+
   Future<_TimerPageData> _load() async {
+    final revision = ++_loadRevision;
+    final userId = widget.userId;
     final results = await Future.wait([
-      _certificationClient.fetchMine(userId: widget.userId),
-      _sessionClient.fetchSummary(userId: widget.userId),
+      _certificationClient.fetchMine(),
+      _sessionClient.fetchSummary(userId: userId),
     ]);
-    final certifications = (results[0] as UserCertificationPage)
-        .items
-        .where((item) => !item.certified)
-        .toList();
+    final certifications = results[0] as List<UserSpec>;
     final summary = results[1] as StudySessionSummary;
 
-    if (certifications.isNotEmpty &&
-        (_selectedCertificationId == null ||
-            !certifications.any(
-              (item) => item.certification.id == _selectedCertificationId,
-            ))) {
-      _selectedCertificationId = certifications.first.certification.id;
+    final data =
+        _TimerPageData(certifications: certifications, summary: summary);
+    // An old request must not reset a newer timer or another user's state.
+    if (mounted && revision == _loadRevision && userId == widget.userId) {
+      _lastData = data;
+      if (_selectedCertificationId != null &&
+          !certifications.any((item) => item.id == _selectedCertificationId)) {
+        _selectedCertificationId = null;
+        _resetTimer();
+      }
     }
 
-    return _TimerPageData(certifications: certifications, summary: summary);
+    return data;
   }
 
   Future<void> _refresh() async {
     final nextFuture = _load();
-    setState(() => _future = nextFuture);
+    final revision = _loadRevision;
+    setState(() {
+      _future = nextFuture;
+    });
     try {
       await nextFuture;
     } catch (_) {
-      // FutureBuilder shows the error state.
+      if (mounted && revision == _loadRevision && _lastData != null) {
+        ScaffoldMessenger.of(context)
+          ..clearSnackBars()
+          ..showSnackBar(
+              const SnackBar(content: Text('타이머 정보를 갱신하지 못했습니다. 다시 시도해주세요.')));
+      }
     }
   }
 
   void _toggleTimer() {
-    if (_selectedCertificationId == null || _saving) {
+    if (_saving) {
       return;
     }
 
@@ -119,7 +147,8 @@ class _TimerScreenState extends State<TimerScreen> {
   }
 
   Future<void> _finishAndSave() async {
-    if (_elapsedSeconds <= 0 || _selectedCertificationId == null || _saving) {
+    if (_saving) return;
+    if (_elapsedSeconds <= 0) {
       _resetTimer();
       return;
     }
@@ -128,6 +157,9 @@ class _TimerScreenState extends State<TimerScreen> {
     final startedAt = _startedAt ?? DateTime.now();
     final endedAt = DateTime.now();
     final durationSeconds = _elapsedSeconds.clamp(0, _maxSeconds);
+    final revision = _timerRevision;
+    final userId = widget.userId;
+    final specId = _selectedCertificationId;
 
     setState(() {
       _running = false;
@@ -137,13 +169,13 @@ class _TimerScreenState extends State<TimerScreen> {
     final messenger = ScaffoldMessenger.of(context);
     try {
       await _sessionClient.create(
-        userId: widget.userId ?? '',
-        certificationId: _selectedCertificationId!,
+        userId: userId ?? '',
+        specId: specId,
         startedAt: startedAt,
         endedAt: endedAt,
         durationSeconds: durationSeconds,
       );
-      if (!mounted) {
+      if (!mounted || revision != _timerRevision || userId != widget.userId) {
         return;
       }
       messenger
@@ -154,7 +186,7 @@ class _TimerScreenState extends State<TimerScreen> {
         );
       _resetTimer();
     } catch (_) {
-      if (!mounted) {
+      if (!mounted || revision != _timerRevision || userId != widget.userId) {
         return;
       }
       setState(() => _saving = false);
@@ -172,6 +204,7 @@ class _TimerScreenState extends State<TimerScreen> {
   }
 
   void _resetTimer() {
+    _timerRevision++;
     _ticker?.cancel();
     setState(() {
       _startedAt = null;
@@ -190,10 +223,12 @@ class _TimerScreenState extends State<TimerScreen> {
       child: RefreshIndicator(
         onRefresh: _refresh,
         child: FutureBuilder<_TimerPageData>(
+          key: ValueKey(widget.userId),
           future: _future,
           builder: (context, snapshot) {
-            final loading = snapshot.connectionState != ConnectionState.done;
-            final data = snapshot.data;
+            final data = snapshot.data ?? _lastData;
+            final loading = snapshot.connectionState != ConnectionState.done &&
+                data == null;
             final certifications = data?.certifications ?? const [];
             final selected = _selectedCertification(certifications);
             final recentRecords = data?.summary.recent ?? const [];
@@ -217,7 +252,7 @@ class _TimerScreenState extends State<TimerScreen> {
                                       style: textTheme.headlineSmall),
                                   const SizedBox(height: AppSpacing.x1),
                                   Text(
-                                    '준비중인 자격증을 선택하고 학습 시간을 기록하세요.',
+                                    '학습 시간을 기록하고 등록한 스펙에 연결하세요.',
                                     style: textTheme.bodyMedium?.copyWith(
                                       color: AppColors.onSurfaceVariant,
                                       fontWeight: FontWeight.w500,
@@ -234,7 +269,7 @@ class _TimerScreenState extends State<TimerScreen> {
                           ],
                         ),
                         const SizedBox(height: AppSpacing.x6),
-                        if (snapshot.hasError)
+                        if (snapshot.hasError && data == null)
                           const _TimerInfoPanel(
                             icon: Icons.error_outline_rounded,
                             title: '타이머 정보를 불러오지 못했습니다.',
@@ -246,24 +281,19 @@ class _TimerScreenState extends State<TimerScreen> {
                                 EdgeInsets.symmetric(vertical: AppSpacing.x12),
                             child: Center(child: CircularProgressIndicator()),
                           )
-                        else if (certifications.isEmpty)
-                          const _TimerInfoPanel(
-                            icon: Icons.inventory_2_outlined,
-                            title: '준비중인 자격증이 없습니다.',
-                            message: '자격증 탭에서 준비 자격증을 등록하면 타이머를 사용할 수 있습니다.',
-                          )
                         else ...[
                           _CertificationSelector(
                             certifications: certifications,
                             selectedId: _selectedCertificationId,
-                            enabled: !_running && !_saving,
+                            enabled:
+                                !_running && !_saving && _elapsedSeconds == 0,
                             onSelected: (id) {
                               setState(() => _selectedCertificationId = id);
                             },
                           ),
                           const SizedBox(height: AppSpacing.x6),
                           _TimerMainCard(
-                            title: selected?.certification.name ?? '자격증',
+                            title: selected?.displayTitle ?? '자유 학습',
                             elapsedSeconds: _elapsedSeconds,
                             maxSeconds: _maxSeconds,
                             running: _running,
@@ -339,15 +369,15 @@ class _TimerScreenState extends State<TimerScreen> {
     );
   }
 
-  UserCertificationItem? _selectedCertification(
-    List<UserCertificationItem> certifications,
+  UserSpec? _selectedCertification(
+    List<UserSpec> certifications,
   ) {
     for (final item in certifications) {
-      if (item.certification.id == _selectedCertificationId) {
+      if (item.id == _selectedCertificationId) {
         return item;
       }
     }
-    return certifications.isEmpty ? null : certifications.first;
+    return null;
   }
 }
 
@@ -357,7 +387,7 @@ class _TimerPageData {
     required this.summary,
   });
 
-  final List<UserCertificationItem> certifications;
+  final List<UserSpec> certifications;
   final StudySessionSummary summary;
 }
 
@@ -369,10 +399,10 @@ class _CertificationSelector extends StatelessWidget {
     required this.onSelected,
   });
 
-  final List<UserCertificationItem> certifications;
+  final List<UserSpec> certifications;
   final String? selectedId;
   final bool enabled;
-  final ValueChanged<String> onSelected;
+  final ValueChanged<String?> onSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -380,16 +410,23 @@ class _CertificationSelector extends StatelessWidget {
       height: 44,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        itemCount: certifications.length,
+        itemCount: certifications.length + 1,
         separatorBuilder: (_, __) => const SizedBox(width: AppSpacing.x2),
         itemBuilder: (context, index) {
-          final item = certifications[index];
-          final active = item.certification.id == selectedId;
+          if (index == 0) {
+            return _CertChoiceChip(
+                label: '자유 학습',
+                active: selectedId == null,
+                enabled: enabled,
+                onTap: () => onSelected(null));
+          }
+          final item = certifications[index - 1];
+          final active = item.id == selectedId;
           return _CertChoiceChip(
-            label: item.certification.name,
+            label: item.displayTitle,
             active: active,
             enabled: enabled,
-            onTap: () => onSelected(item.certification.id),
+            onTap: () => onSelected(item.id),
           );
         },
       ),
@@ -732,7 +769,7 @@ class _StudyRecordTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  record.certification?.name ?? '자격증 학습',
+                  record.spec?.name ?? record.certification?.name ?? '자유 학습',
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: textTheme.titleSmall,

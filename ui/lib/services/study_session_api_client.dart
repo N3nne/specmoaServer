@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'authenticated_client.dart';
 
 import '../config/app_config.dart';
 import '../models/study_session_data.dart';
@@ -11,7 +12,7 @@ class StudySessionApiClient {
   final http.Client? _client;
 
   Future<StudySessionSummary> fetchSummary({String? userId}) async {
-    final client = _client ?? http.Client();
+    final client = _client ?? AuthenticatedClient();
 
     try {
       final response = await client.get(
@@ -39,12 +40,13 @@ class StudySessionApiClient {
 
   Future<void> create({
     required String userId,
-    required String certificationId,
+    String? certificationId,
+    String? specId,
     required DateTime startedAt,
     required DateTime endedAt,
     required int durationSeconds,
   }) async {
-    final client = _client ?? http.Client();
+    final client = _client ?? AuthenticatedClient();
 
     try {
       final response = await client
@@ -55,7 +57,8 @@ class StudySessionApiClient {
               if (userId.isNotEmpty) 'x-user-id': userId,
             },
             body: jsonEncode({
-              'certificationId': certificationId,
+              if (certificationId != null) 'certificationId': certificationId,
+              if (specId != null) 'specId': specId,
               'startedAt': startedAt.toIso8601String(),
               'endedAt': endedAt.toIso8601String(),
               'durationSeconds': durationSeconds,

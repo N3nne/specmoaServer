@@ -10,12 +10,18 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
+      - key: JWT_SECRET
+        generateValue: true
       - key: DB_SCHEMA
         value: public
       - key: DB_SYNC
         value: "false"
       - key: DB_SSL
         value: "true"
+      - key: JOBS_SOURCE
+        value: demo
+      - key: AI_DEMO_ENABLED
+        value: "false"
       - key: CORS_ORIGIN
         value: ""
       - key: DATABASE_URL

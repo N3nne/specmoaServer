@@ -171,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (!mounted) {
         return;
       }
-      AuthScope.of(context).signIn(user);
+      await AuthScope.of(context).signIn(user);
     } catch (error) {
       if (mounted) {
         _showMessage(error.toString().replaceFirst('Exception: ', ''));
@@ -190,7 +190,13 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
     if (mounted && user != null) {
-      AuthScope.of(context).signIn(user);
+      try {
+        await AuthScope.of(context).signIn(user);
+      } catch (error) {
+        if (mounted) {
+          _showMessage(error.toString().replaceFirst('Exception: ', ''));
+        }
+      }
     }
   }
 

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'authenticated_client.dart';
 
 import '../config/app_config.dart';
 import '../models/success_story_list_data.dart';
@@ -23,7 +24,7 @@ class SuccessStoryApiClient {
       if (certificationId != null && certificationId.isNotEmpty)
         'certificationId': certificationId,
     };
-    final client = _client ?? http.Client();
+    final client = _client ?? AuthenticatedClient();
 
     try {
       final response = await client
@@ -58,7 +59,7 @@ class SuccessStoryApiClient {
     required String score,
     required String examAttempt,
   }) async {
-    final client = _client ?? http.Client();
+    final client = _client ?? AuthenticatedClient();
 
     try {
       final response = await client
@@ -100,7 +101,7 @@ class SuccessStoryApiClient {
   }
 
   Future<SuccessStoryItem> recordView(String id) async {
-    final client = _client ?? http.Client();
+    final client = _client ?? AuthenticatedClient();
 
     try {
       final response = await client

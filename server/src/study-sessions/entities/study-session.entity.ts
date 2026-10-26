@@ -3,12 +3,14 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  JoinColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 import { CertificationEntity } from '../../certifications/entities/certification.entity';
 import { UserEntity } from '../../users/entities/user.entity';
+import { UserSpecEntity } from '../../specs/entities/user-spec.entity';
 
 @Entity({ name: 'study_sessions' })
 export class StudySessionEntity {
@@ -20,6 +22,13 @@ export class StudySessionEntity {
 
   @ManyToOne(() => CertificationEntity, { nullable: true })
   certification?: CertificationEntity;
+
+  @Column({ type: 'uuid', nullable: true })
+  specId: string | null;
+
+  @ManyToOne(() => UserSpecEntity, { nullable: true, onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'specId' })
+  spec: UserSpecEntity | null;
 
   @Column({ type: 'timestamptz' })
   startedAt: Date;

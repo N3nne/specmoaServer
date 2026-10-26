@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'authenticated_client.dart';
 
 import '../config/app_config.dart';
 import '../models/user_certification_data.dart';
@@ -11,7 +12,7 @@ class UserCertificationApiClient {
   final http.Client? _client;
 
   Future<UserCertificationPage> fetchMine({String? userId}) async {
-    final client = _client ?? http.Client();
+    final client = _client ?? AuthenticatedClient();
 
     try {
       final response = await client.get(
@@ -47,7 +48,7 @@ class UserCertificationApiClient {
     String? preparationCategory,
     String? notes,
   }) async {
-    final client = _client ?? http.Client();
+    final client = _client ?? AuthenticatedClient();
 
     try {
       final response = await client
@@ -87,7 +88,7 @@ class UserCertificationApiClient {
     required String userId,
     required String userCertificationId,
   }) async {
-    final client = _client ?? http.Client();
+    final client = _client ?? AuthenticatedClient();
 
     try {
       final response = await client.post(

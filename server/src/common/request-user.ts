@@ -1,19 +1,9 @@
-import { BadRequestException } from '@nestjs/common';
+import { UnauthorizedException } from '@nestjs/common';
+
+export const VERIFIED_USER_ID = Symbol('verifiedUserId');
 
 export function getUserIdFromHeaders(headers: Record<string, unknown>) {
-  const value = headers['x-user-id'];
-
-  if (Array.isArray(value)) {
-    return value[0];
-  }
-
-  if (typeof value === 'string' && value.trim().length > 0) {
-    return value.trim();
-  }
-
-  if (value == null) {
-    return undefined;
-  }
-
-  throw new BadRequestException('x-user-id must be a string when provided.');
+  const value: unknown = Reflect.get(headers, VERIFIED_USER_ID);
+  if (typeof value === 'string' && value.length > 0) return value;
+  throw new UnauthorizedException('로그인이 필요합니다.');
 }

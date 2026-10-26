@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'authenticated_client.dart';
 
 import '../config/app_config.dart';
 import '../models/certification_ranking_data.dart';
@@ -22,7 +23,7 @@ class CertificationRankingApiClient {
       if (qualificationType != 'all') 'qualificationType': qualificationType,
       if (tagId != null && tagId.isNotEmpty) 'tagId': tagId,
     };
-    final client = _client ?? http.Client();
+    final client = _client ?? AuthenticatedClient();
 
     try {
       final response = await client

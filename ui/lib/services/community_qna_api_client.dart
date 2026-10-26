@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'authenticated_client.dart';
 
 import '../config/app_config.dart';
 import '../models/community_qna_data.dart';
@@ -23,7 +24,7 @@ class CommunityQnaApiClient {
       if (certificationId != null && certificationId.isNotEmpty)
         'certificationId': certificationId,
     };
-    final client = _client ?? http.Client();
+    final client = _client ?? AuthenticatedClient();
 
     try {
       final response = await client
@@ -55,7 +56,7 @@ class CommunityQnaApiClient {
     required List<String> tags,
     required bool isAnonymous,
   }) async {
-    final client = _client ?? http.Client();
+    final client = _client ?? AuthenticatedClient();
 
     try {
       final response = await client
@@ -96,7 +97,7 @@ class CommunityQnaApiClient {
   }
 
   Future<CommunityQnaItem> recordView(String id) async {
-    final client = _client ?? http.Client();
+    final client = _client ?? AuthenticatedClient();
 
     try {
       final response = await client
@@ -118,7 +119,7 @@ class CommunityQnaApiClient {
   }
 
   Future<CommunityQnaAnswerPage> fetchAnswers(String postId) async {
-    final client = _client ?? http.Client();
+    final client = _client ?? AuthenticatedClient();
 
     try {
       final response = await client
@@ -145,7 +146,7 @@ class CommunityQnaApiClient {
     required String userId,
     required String body,
   }) async {
-    final client = _client ?? http.Client();
+    final client = _client ?? AuthenticatedClient();
 
     try {
       final response = await client
@@ -178,7 +179,7 @@ class CommunityQnaApiClient {
     required String answerId,
     required String userId,
   }) async {
-    final client = _client ?? http.Client();
+    final client = _client ?? AuthenticatedClient();
 
     try {
       final response = await client.post(

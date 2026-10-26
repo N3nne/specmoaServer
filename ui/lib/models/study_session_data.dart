@@ -26,6 +26,7 @@ class StudySessionRecord {
     this.endedAt,
     this.note,
     this.certification,
+    this.spec,
   });
 
   final String id;
@@ -34,6 +35,7 @@ class StudySessionRecord {
   final int durationSeconds;
   final String? note;
   final StudySessionCertification? certification;
+  final StudySessionCertification? spec;
 
   factory StudySessionRecord.fromJson(Map<String, dynamic> json) {
     final certification =
@@ -49,6 +51,10 @@ class StudySessionRecord {
       certification: certification == null
           ? null
           : StudySessionCertification.fromJson(certification),
+      spec: json['spec'] is Map
+          ? StudySessionCertification.fromJson(
+              (json['spec'] as Map).cast<String, dynamic>())
+          : null,
     );
   }
 }

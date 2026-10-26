@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
+import 'authenticated_client.dart';
 
 import '../config/app_config.dart';
 import '../models/certification_detail_data.dart';
@@ -10,8 +11,9 @@ class CertificationDetailApiClient {
 
   final http.Client? _client;
 
-  Future<CertificationDetailData> fetchDetailPage(String certificationId) async {
-    final client = _client ?? http.Client();
+  Future<CertificationDetailData> fetchDetailPage(
+      String certificationId) async {
+    final client = _client ?? AuthenticatedClient();
 
     try {
       final response = await client

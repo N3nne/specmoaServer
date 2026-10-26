@@ -3,9 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import '../auth/auth_session.dart';
-import 'certifications_screen.dart';
 import 'explore_screen.dart';
-import 'home_screen.dart';
+import 'my_spec_screen.dart';
 import 'profile_screen.dart';
 import 'timer_screen.dart';
 
@@ -24,10 +23,12 @@ class _RootShellState extends State<RootShell> {
     final session = AuthScope.of(context);
     final userId = session.user?.id;
     final screens = [
-      HomeScreen(userId: userId),
-      CertificationsScreen(userId: userId),
+      MySpecScreen(
+        userId: userId,
+        displayName: session.user?.displayName,
+      ),
       TimerScreen(userId: userId),
-      const ExploreScreen(),
+      ExploreScreen(userId: userId),
       const ProfileScreen(),
     ];
 
@@ -49,14 +50,9 @@ class _RootShellState extends State<RootShell> {
             },
             destinations: const [
               NavigationDestination(
-                icon: Icon(Icons.home_outlined),
-                selectedIcon: Icon(Icons.home_rounded),
-                label: '홈',
-              ),
-              NavigationDestination(
-                icon: Icon(Icons.inventory_2_outlined),
-                selectedIcon: Icon(Icons.inventory_2_rounded),
-                label: '자격증',
+                icon: Icon(Icons.folder_zip_outlined),
+                selectedIcon: Icon(Icons.folder_zip_rounded),
+                label: '내 스펙',
               ),
               NavigationDestination(
                 icon: Icon(Icons.timer_outlined),
