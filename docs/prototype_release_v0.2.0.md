@@ -29,7 +29,9 @@
 - [x] GitHub v0.2.0 초안 릴리즈에 APK와 SHA-256 저장.
 - [x] Supabase 백업·스키마 확인·필요 마이그레이션·가상 공고 준비.
 - [x] Render 최신 서버 배포 및 실제 API 호환성 확인.
-- [ ] 실기기 검증 후 공개 다운로드·QR 준비.
+- [x] S24 업데이트 설치 및 로그인 화면 초기 실행 검증.
+- [x] 사용자 승인 후 프로토타입 릴리스 공개 및 비인증 다운로드 확인.
+- [ ] 로그인 이후 전체 기능 실기기 검증. QR은 필요 시 별도 요청으로 진행.
 
 ## 클라우드 접속 정보
 
@@ -72,9 +74,9 @@ Render 설정에는 가상 공고 사용을 명시하고(`JOBS_SOURCE=demo`) 외
 
 - 소스 커밋: `8d7a744` (`Prepare v0.2.0 spec management prototype`).
 - 소스: https://github.com/N3nne/specmoaServer/tree/specmoa_ver2%280.2.0%29
-- 초안 릴리즈 ID: `424470818`, 태그 예정 이름 `v0.2.0-prototype`.
-- 초안: https://github.com/N3nne/specmoaServer/releases/tag/untagged-de4edeb0f9a21e846de9
-- 초안이므로 저장소 소유자 권한으로 확인하며, 공개 다운로드/QR은 아직 제공하지 않는다.
+- 릴리즈 ID: `424470818`, 공개 태그 `v0.2.0-prototype`.
+- 공개 프로토타입: https://github.com/N3nne/specmoaServer/releases/tag/v0.2.0-prototype
+- 초안 업로드 후 사용자 승인에 따라 prerelease로 공개했다. QR 생성은 이번 요청에 포함되지 않았다.
 - APK: `release/specmoa-prototype-v0.2.0.apk`, 56,216,218 bytes.
 - APK SHA-256: `3e6f5aa44f2d5a993303e7fedf0cbe1cd8e4728c8b5e5f715a4356edc850cd24`.
 - APK와 SHA-256 파일을 초안에 업로드했고 GitHub가 반환한 APK digest가 로컬 해시와 일치했다.
@@ -137,7 +139,7 @@ Supabase 주소 수정 후에는 승인된 기존 프로젝트의 Session pooler
 
 ## 남은 범위와 주의
 
-- 휴대폰 설치/실행 검증 후 APK 초안 공개·다운로드 QR 진행. 현재 GitHub 릴리즈는 계속 초안이다.
+- 휴대폰 업데이트 설치·초기 실행 검증과 프로토타입 공개는 완료했다. 로그인 이후 전체 기능 실기기 검증과 필요 시 QR 생성은 별도 진행한다.
 - 현재는 프로토타입이다. 로그인 요청 제한·실제 비밀번호 재설정 메일·개인화 AI 등 미완료 범위는 그대로 남아 있다.
 - 배포 로그의 의존성 경고를 별도로 확인했다. `npm audit --omit=dev --json` 기준 런타임 의존성 경고 11개(높음 4, 보통 7, 치명적 0)가 남아 있다. 관련 패키지는 @nestjs/platform-express, body-parser, lodash, multer 등이며 정식 공개 전에 우선 보완해야 한다.
 - 감사 도구가 메이저 버전 변경을 포함한 해결책을 제시하므로 이번 배포에서 `npm audit fix --force`를 실행하지 않았다. 별도 변경·회귀 검증이 필요하다.
@@ -149,3 +151,15 @@ Supabase 주소 수정 후에는 승인된 기존 프로젝트의 Session pooler
 - 기존 릴리스 ID `424470818`의 APK와 체크섬은 uploaded 상태이며 APK digest가 로컬 SHA-256과 일치한다. 같은 파일을 중복 업로드하지 않았다.
 - 릴리스 대상 브랜치를 새 이름으로 갱신했다. 예정 태그는 `v0.2.0-prototype`이며, 공개 여부 확인 전에는 초안을 유지한다.
 - Windows에 삼성 S24가 연결되어 있지만 ADB 기기는 아직 감지되지 않는다. USB 디버깅 허용을 요청했으며 설치/실행 검증은 미완료다.
+
+## 휴대폰 설치 및 프로토타입 공개 완료 (2026-10-27)
+
+- 사용자가 USB 디버깅을 허용하고 프로토타입 릴리스 공개를 승인했다.
+- 삼성 S24(SM-S921N)에 `adb install -r`로 기존 0.1.2에서 0.2.0(빌드 4)으로 업데이트했다. 앱 데이터를 초기화하거나 앱을 삭제하지 않았다.
+- MainActivity 시작 결과 Status ok, 로그인 화면이 정상 표시됐고 앱 프로세스가 유지됐다. 확인한 시작 구간의 Android/Flutter 오류 로그는 0건이었다. 로그인 이후 전체 기능의 실기기 검증까지 완료한 것은 아니다.
+- 로컬 시작 화면 증빙: `.buildlog/device-v0.2.0-launch.png`. 실제 사용자 계정 입력/로그인은 수행하지 않았다.
+- GitHub 릴리스 `424470818`을 `draft=false`, `prerelease=true`, `make_latest=false`로 공개했다. 기존 0.1.x 릴리스와 main/Render 배포 설정은 유지했다.
+- 공개: https://github.com/N3nne/specmoaServer/releases/tag/v0.2.0-prototype
+- APK: https://github.com/N3nne/specmoaServer/releases/download/v0.2.0-prototype/specmoa-prototype-v0.2.0.apk
+- GitHub 인증 없는 릴리스 조회 및 APK 다운로드 확인 모두 HTTP 200. APK 크기 56,216,218 bytes와 SHA-256은 기존 빌드와 동일하다.
+- 정식 운영 버전이 아닌 테스트용 사전 공개 버전이다. 남은 보안 경고와 미구현 범위를 공개 릴리스 설명에도 명시했다.
