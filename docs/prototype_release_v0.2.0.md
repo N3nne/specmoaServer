@@ -106,6 +106,15 @@ Supabase 주소 수정 후에는 승인된 기존 프로젝트의 Session pooler
 
 ## 현재 재개 지점: Render 배포
 
+2026-10-27 추가 승인 및 진행: Render 연동을 연결했고 사용자가 `nne's workspace`의 기존 무료 `specmoa-api` 서비스를 확인했다. 서비스는 main 자동 배포이며 연동 도구가 브랜치 변경을 지원하지 않아, 사용자가 v0.2.0을 main에 반영하고 자동 배포하는 방식을 명시적으로 승인했다. 아래의 codex 브랜치 직접 지정 계획은 이 승인으로 대체한다.
+
+- Render 서비스 `srv-d8hdve6gvqtc73d6493g`, 워크스페이스 `tea-d8hdu528qa3s73bjfehg`.
+- 기존 요금제 free, URL `https://specmoa-api.onrender.com`, rootDir `server`, main 커밋 자동 배포 확인.
+- 기존 환경변수를 삭제하지 않는 병합 방식으로 유효한 DATABASE_URL과 production/public/SSL=true/DB_SYNC=false/JOBS_SOURCE=demo/AI_DEMO_ENABLED=false를 반영했다.
+- 기존 JWT_SECRET은 덮어쓰지 않았다. 새 서버 시작 시 요구 조건을 충족하지 않으면 배포 로그로 확인하고 필요한 경우에만 안전하게 보완한다.
+- 기존 성공 배포 `dep-d8hebbnlk1mc73ef2jkg`, 커밋 `1cfe16e93ccd3d6a43a65f862e6c77f3ada6934b`를 복구 참고로 보존한다.
+- 다음 단계: main fast-forward 푸시로 발생한 자동 배포를 추적한다. 같은 배포를 중복 요청하지 않는다.
+
 - 브라우저 전용 도구는 kernel assets 경로 오류로 사용하지 못했다. Windows Computer Use도 현재 브라우저 URL을 안전하게 확인하지 못한다며 해당 턴 제어를 중단했다. 이 차단을 우회하지 않는다.
 - 따라서 Render 배포/환경변수 변경은 이번에 수행하지 않았다. 현재 기존 main 서버라고 간주하며, 새 API 정상 응답을 확인하기 전에는 APK 연동 완료로 보고하지 않는다.
 - Render의 기존 `specmoa-api` 서비스 배포 브랜치를 `codex/prototype-v0.2.0`으로 지정하고 배포해야 한다. main 브랜치를 바꾸거나 기존 릴리즈를 덮어쓰지 않는다.
