@@ -34,7 +34,7 @@
 - [x] Flutter analyze 오류 없음.
 - [x] Release APK 빌드·서명·버전·서버 주소 확인.
 - [x] S24 업데이트 설치 및 스크롤/탭별 실제 화면 확인.
-- [ ] GitHub 소스 push, APK·체크섬 릴리스 업로드·공개 다운로드 확인.
+- [x] GitHub 소스 push, APK·체크섬 릴리스 업로드·공개 다운로드 확인.
 
 APK: `release/specmoa-prototype-v0.2.1.apk`, 56,215,966 bytes.
 SHA-256: `f68bf9aa43a133b2f8299208320ab8007d62e49ce69e976c646638b68fdf42eb`.
@@ -43,6 +43,16 @@ SHA-256: `f68bf9aa43a133b2f8299208320ab8007d62e49ce69e976c646638b68fdf42eb`.
 S24의 기존 로그인 세션이 복구됐고 내 스펙 마지막 빈 상태 카드가 하단 메뉴 위로 전체 표시되는 것을 실제 screenshot으로 확인했다. 12개 스펙 카드가 있는 경우는 가상 데이터 위젯 테스트로 별도 검증했다. 네 탭의 공통 상단 바와 탐색 목록 표시를 확인했으며, 최종 실행 로그의 Android/Flutter 오류는 0건이었다. 새 스펙이나 학습 기록을 실제 사용자 계정에 추가하지 않았다.
 
 로컬 화면 증빙은 `.buildlog/device-v0.2.1-*.png`이다. 사용자 계정 정보가 포함될 수 있어 GitHub에 올리지 않는다.
+
+## GitHub 공개 결과
+
+- 소스 커밋: `bb8ddf5526c30e1877373a46fc2b10ca2e5cecc7`, 브랜치 `specmoa_ver2(0.2.0)`.
+- 릴리스 ID `424844880`, 태그 `v0.2.1-prototype`, 공개 prerelease. 기존 릴리스와 main은 보존했다.
+- 릴리스: https://github.com/N3nne/specmoaServer/releases/tag/v0.2.1-prototype
+- APK: https://github.com/N3nne/specmoaServer/releases/download/v0.2.1-prototype/specmoa-prototype-v0.2.1.apk
+- APK 및 SHA-256 텍스트 업로드 완료. GitHub가 반환한 APK digest와 로컬 해시, 휴대폰 설치본의 SHA-256이 모두 일치한다.
+- 비인증 릴리스 조회와 APK 다운로드 모두 HTTP 200, 크기 56,215,966 bytes 확인.
+- 후속 커밋은 이 검증 결과 문서만 갱신하며 앱 소스/설치본은 변경하지 않는다. 실행 중인 테스트·빌드 세션은 없다.
 
 ## 재사용 및 신규 컴포넌트
 
