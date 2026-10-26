@@ -27,7 +27,7 @@
 - [x] Android APK 빌드 및 패키지/서명/서버 주소 점검.
 - [x] 변경 파일·비밀정보 점검, 앱/서버 소스 커밋·버전 브랜치 푸시.
 - [x] GitHub v0.2.0 초안 릴리즈에 APK와 SHA-256 저장.
-- [ ] Supabase 백업·스키마 확인·필요 마이그레이션·가상 공고 준비.
+- [x] Supabase 백업·스키마 확인·필요 마이그레이션·가상 공고 준비.
 - [ ] Render 최신 서버 배포 및 호환성 확인.
 - [ ] 실기기 검증 후 공개 다운로드·QR 준비.
 
@@ -79,14 +79,38 @@ Render 설정에는 가상 공고 사용을 명시하고(`JOBS_SOURCE=demo`) 외
 - APK SHA-256: `3e6f5aa44f2d5a993303e7fedf0cbe1cd8e4728c8b5e5f715a4356edc850cd24`.
 - APK와 SHA-256 파일을 초안에 업로드했고 GitHub가 반환한 APK digest가 로컬 해시와 일치했다.
 
-## 현재 재개 지점
+## 이전 인증 문제 (해결)
 
 Supabase 주소 수정 후에는 승인된 기존 프로젝트의 Session pooler에 도달했으나 비밀번호 인증이 `28P01`로 거절됐다.
 자동 반복 접속을 중단했다. 클라우드 백업·마이그레이션·가상 공고 입력·Render 배포는 아직 수행하지 않았다.
 사용자가 DB 비밀번호 확인 위치를 질문했으며, 다음 답변에서 Render에 저장된 DATABASE_URL 확인 또는 Supabase Database > Settings 비밀번호 재설정 경로를 안내한다.
 
-비밀번호 수정 완료라는 새 응답을 받으면 파일을 다시 읽고 한 번 접속을 확인한다. 기존 잘못된 비밀번호를 다시 시도하지 않는다.
-백업은 앱 public 스키마의 백업이라는 범위를 명시하고, 로컬 격리 DB 복원 검증 후에만 필요한 마이그레이션을 적용한다.
-Render는 여전히 기존 main 버전이다. API 404가 없어졌다는 검증 전에는 APK가 정상 연동된다고 보고하지 않는다.
+사용자가 접속 정보를 다시 수정하여 이 인증 문제는 해결됐다. 아래의 Supabase 업데이트 완료 상태와 다음 재개 지점을 따른다.
 
 관련 실행 세션은 모두 완료했다. Android 휴대폰은 현재 연결되지 않았다.
+
+## Supabase 업데이트 완료 (2026-10-27)
+
+- 수정된 접속 설정으로 승인된 기존 프로젝트(PostgreSQL 17.6)에 연결했다.
+- 같은 PostgreSQL 스냅샷에서 public 스키마의 19개 테이블을 백업했다. Auth/Storage 등 다른 스키마를 포함하는 전체 Supabase 프로젝트 백업은 아니다.
+- 백업: `db/supabase_public_before_v0.2.0_20261027_83d16d3a.dump` (641,755 bytes, Git 제외).
+- SHA-256: `2e10842f4434691fb23c0781795a322cc050dfbe80ad66d885ced1af2a54f593`.
+- 로컬의 새 무작위 이름 임시 DB에 복원하고 기존 19개 테이블의 건수·ID·모든 기존 필드 내용 해시가 일치하는지 확인했다.
+- 복원 시 public의 `uuid-ossp` 확장을 먼저 준비하고, 사전 생성한 public 스키마의 CREATE SCHEMA 항목만 아카이브 실행 목록에서 제외했다. 원본 dump는 변경하지 않았다.
+- 복원 사본에서 마이그레이션 3개를 먼저 검증한 후 실제 Supabase에 같은 3개를 트랜잭션으로 적용했다. `DB_SYNC`/자동 동기화는 사용하지 않았다.
+- `user_specs`, `auth_sessions`, `job_postings`, TypeORM `migrations` 관리 테이블 추가 및 `study_sessions.specId` 추가.
+- 기존 취득 자격증 5건을 `user_specs`로 복사했다. 원본 `user_certifications` 11건을 비롯한 기존 19개 테이블의 기존 필드 내용이 모두 보존됐음을 재검증했다.
+- 새 `job_postings`에만 demo/synthetic 공고 40건 저장. 실제 공고나 지원 가능한 공고로 표시하지 않는다.
+- 상세 검증 메타데이터는 비밀정보 없이 로컬 `.buildlog/supabase-backup-state.json`에 저장했다.
+- Render 최신 코드 배포와 APK 실기기 검증은 아직 남아 있다. GitHub 릴리즈는 계속 초안이다.
+
+## 현재 재개 지점: Render 배포
+
+- 브라우저 전용 도구는 kernel assets 경로 오류로 사용하지 못했다. Windows Computer Use도 현재 브라우저 URL을 안전하게 확인하지 못한다며 해당 턴 제어를 중단했다. 이 차단을 우회하지 않는다.
+- 따라서 Render 배포/환경변수 변경은 이번에 수행하지 않았다. 현재 기존 main 서버라고 간주하며, 새 API 정상 응답을 확인하기 전에는 APK 연동 완료로 보고하지 않는다.
+- Render의 기존 `specmoa-api` 서비스 배포 브랜치를 `codex/prototype-v0.2.0`으로 지정하고 배포해야 한다. main 브랜치를 바꾸거나 기존 릴리즈를 덮어쓰지 않는다.
+- `DATABASE_URL`은 현재 유효한 Supabase 주소, `DB_SCHEMA=public`, `DB_SSL=true`, `DB_SYNC=false`, `JOBS_SOURCE=demo`, `AI_DEMO_ENABLED=false`를 확인한다. JWT_SECRET은 기존 값을 유지하고 최소 32자여야 한다.
+- DB 마이그레이션과 가상 공고 입력은 이미 완료했으므로 다시 초기화/덤프 복원/전체 삭제하지 않는다.
+- 배포 후 `/health`, 인증, 사용자별 스펙 CRUD, 학습 기록, 가상 공고 조회/조건 비교를 확인하고, 임시 검증 계정만 정확히 식별해 정리한다.
+- 휴대폰 설치/실행 검증 이후에만 초안 릴리즈 공개와 다운로드 QR을 진행한다.
+- 로컬 임시 복원 DB는 정리했고 Supabase/로컬 작업 연결을 닫았다. 검증된 원본 dump는 보존했다.
